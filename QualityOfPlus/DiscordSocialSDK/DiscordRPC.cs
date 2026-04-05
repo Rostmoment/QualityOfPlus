@@ -24,7 +24,7 @@ namespace QualityOfPlus.DiscordSocialSDK
         private const string CAMPFIRE_ICON_LINK = "campfire-icon";
         private const string PICNIC_ICON_LINK = "apple-icon";
 
-        private static void Clear() => DiscordSocialSDKComponent.rpc.Clear();
+        private static void Clear() => DiscordSocialSDKComponent.rpc.Wipe();
 
         private static void SetMain()
         {
@@ -33,6 +33,7 @@ namespace QualityOfPlus.DiscordSocialSDK
                 Clear();
                 return;
             }
+
             DiscordSocialSDKComponent.rpc.ClearButtons();
             DiscordSocialSDKComponent.rpc.SetActivityType(ActivityTypes.Playing);
 
@@ -58,6 +59,8 @@ namespace QualityOfPlus.DiscordSocialSDK
                 DiscordSocialSDKComponent.rpc.CurrentState,
                 DiscordSocialSDKComponent.rpc.CurrentStateUrl
             );
+
+            SetMain();
         }
 
 

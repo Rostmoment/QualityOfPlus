@@ -8,11 +8,30 @@ using System.Text;
 namespace QualityOfPlus.BetterElevator
 {
     [HarmonyPatch(typeof(ElevatorScreen))]
-    class BackButtonsInElevator
+    public class BackButtonsInElevator
     {
-        private static void ShowButtons(ElevatorScreen __instance)
+        public static bool ForcedStart => ForceStartCounter > 0;
+        public static int ForceStartCounter { get; private set; }
+        public static void ForceStart() => ForceStartCounter++;
+        public static void ReleaseStart()
         {
-            if (!BetterElevatorComponent.OldButtons)
+            if (ForceStartCounter > 0)
+                ForceStartCounter--;
+        }
+
+        public static bool LockedStart => LockedStartCounter > 0;
+        public static int LockedStartCounter { get; private set; }
+        public static void LockStart() => LockedStartCounter++;
+        public static void UnlockStart()
+        {
+            if (LockedStartCounter > 0)
+                ForceStartCounter--;
+        }
+
+        private static void ShowButtons(ElevatorScreen __instance)
+
+        {
+            if ((!BetterElevatorComponent.OldButtons || ForcedStart) && !LockedStart)
             {
                 __instance.StartGame();
                 return;
