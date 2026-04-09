@@ -115,18 +115,46 @@ namespace QualityOfPlus.DarkMode
             {
                 __instance.StartCoroutine(ChangePickMenu()),
                 __instance.StartCoroutine(ChangeMenu("About")),
-                __instance.StartCoroutine(ChangeMenu("HideSeekMenu")),
                 __instance.StartCoroutine(ChangeMenu("PickChallenge")),
                 __instance.StartCoroutine(ChangeMenu("PickFieldTrip")),
                 __instance.StartCoroutine(ChangeMenu("PickEndlessMap")),
                 __instance.StartCoroutine(ChangeMenu("HideSeekWarning")),
                 __instance.StartCoroutine(ChangeEndlessMenu()),
-                __instance.StartCoroutine(ChangeContinueMenu())
+                __instance.StartCoroutine(ChangeContinueMenu()),
+                __instance.StartCoroutine(ChangeHideAndSeek())
             };
             while (coroutines.Any(x => x != null))
             {
                 yield return null;
                 gameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+            }
+        }
+        private static IEnumerator ChangeHideAndSeek()
+        {
+            GameObject target = gameObjects.Find(x => x.name == "HideSeekMenu");
+            while (true)
+            {
+                yield return null;
+                target = gameObjects.Find(x => x.name == "HideSeekMenu");
+                if (target != null)
+                    break;
+            }
+            target.transform.Find("BG").GetComponent<Image>().color = Color.black;
+            foreach (TextMeshProUGUI text in target.GetComponentsInChildren<TextMeshProUGUI>())
+            {
+                if (text.transform.parent.name != "Tooltip" && text.color == Color.black)
+                    text.color = Color.white;
+            }
+            foreach (Transform t in target.transform)
+                ChangeMenuToggleColor(t);
+
+            target.transform.Find($"MainNew").GetComponent<TextMeshProUGUI>().color = Color.white;
+            target.transform.Find($"MainNewWarning").GetComponent<TextMeshProUGUI>().color = Color.white;
+            target.transform.Find($"MainContinue").GetComponent<TextMeshProUGUI>().color = Color.white;
+            for (int i = 2; i <= 5; i++)
+            {
+                Transform newGame = target.transform.Find($"MainNew_{i}");
+                newGame.GetComponent<TextMeshProUGUI>().color = Color.white;
             }
         }
         private static IEnumerator ChangeContinueMenu()
@@ -141,6 +169,7 @@ namespace QualityOfPlus.DarkMode
                 mainNew.GetComponent<TextMeshProUGUI>().color = Color.white;
             yield return null;
         }
+
         private static IEnumerator ChangeMenu(string menu)
         {
             GameObject target = gameObjects.Find(x => x.name == menu);
