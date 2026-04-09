@@ -119,13 +119,27 @@ namespace QualityOfPlus.DarkMode
                 __instance.StartCoroutine(ChangeMenu("PickChallenge")),
                 __instance.StartCoroutine(ChangeMenu("PickFieldTrip")),
                 __instance.StartCoroutine(ChangeMenu("PickEndlessMap")),
+                __instance.StartCoroutine(ChangeMenu("HideSeekWarning")),
                 __instance.StartCoroutine(ChangeEndlessMenu()),
+                __instance.StartCoroutine(ChangeContinueMenu())
             };
             while (coroutines.Any(x => x != null))
             {
                 yield return null;
                 gameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
             }
+        }
+        private static IEnumerator ChangeContinueMenu()
+        {
+            GameObject mainContinue = GameObject.Find("MainContinue");
+            if (!mainContinue.IsNullOrDestroyed())
+                mainContinue.GetComponent<TextMeshProUGUI>().color = Color.white;
+            yield return null;
+
+            GameObject mainNew = GameObject.Find("MainNewWarning");
+            if (!mainNew.IsNullOrDestroyed())
+                mainNew.GetComponent<TextMeshProUGUI>().color = Color.white;
+            yield return null;
         }
         private static IEnumerator ChangeMenu(string menu)
         {

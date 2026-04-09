@@ -19,6 +19,7 @@ namespace QualityOfPlus
             return asset.data[typeof(T)].ContainsKey(key);
         }
         public static int GetElevatorsCount(this EnvironmentController ec) => ec.ElevatorManager.Elevators.Count;
+        public static int GetTotalOutOfOrderElevators(this EnvironmentController ec) => ec.ElevatorManager.TotalOutOfOrderElevators;
         public static int GetOutOfElevatorsCount(this EnvironmentController ec) => ec.ElevatorManager.Elevators.Count(x => x.CurrentState == ElevatorState.OutOfOrder);
         public static T ValueOrDefault<T>(this ConfigEntry<T> config, T defaultValue)
         {

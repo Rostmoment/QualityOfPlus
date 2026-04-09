@@ -13,13 +13,13 @@ namespace QualityOfPlus.BetterHUD
 
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.UpdateNotebookText))]
         [HarmonyPrefix]
-        private static void FixNotebookText(HudManager __instance, int textVal)
+        private static void Icon(HudManager __instance, int textVal)
         {
             if (!BetterHUDComponent.ElevatorsCounter)
                 return;
 
             Image img = __instance.transform.Find("NotebookIcon").GetComponent<Image>();
-            if (BaseGameManager.Instance.FoundNotebooks < BaseGameManager.Instance.Ec.notebookTotal || BaseGameManager.Instance is EndlessGameManager)
+            if (BaseGameManager.Instance.FoundNotebooks<BaseGameManager.Instance.Ec.notebookTotal || BaseGameManager.Instance is EndlessGameManager)
                 Graphics.CopyTexture(BasePlugin.Asset.Get<Texture2D>("NotebooksCounterIconSheet"), img.sprite.texture);
             else
                 Graphics.CopyTexture(BasePlugin.Asset.Get<Texture2D>("ElevatorsCounterIconSheet"), img.sprite.texture);
@@ -28,20 +28,20 @@ namespace QualityOfPlus.BetterHUD
 
         [HarmonyPatch(typeof(EndlessGameManager), nameof(EndlessGameManager.CollectNotebooks))]
         [HarmonyPostfix]
-        private static void ExtendedText(EndlessGameManager __instance, int count)
+        private static void Text(EndlessGameManager __instance, int count)
         {
             string text = __instance.FoundNotebooks.ToString();
 
             if (BetterHUDComponent.ExtendedCounterText)
                 text += " " + LocalizationManager.Instance.GetLocalizedText("Hud_Notebooks");
 
-            Singleton<CoreGameManager>.Instance.GetHud(0).UpdateNotebookText(0, __instance.FoundNotebooks.ToString(), count > 0);
+            Singleton<CoreGameManager>.Instance.GetHud(0).UpdateNotebookText(0, text, count > 0);
         }
 
         [HarmonyPatch(typeof(Elevator), nameof(Elevator.SetState))]
         [HarmonyPatch(typeof(BaseGameManager), nameof(BaseGameManager.CollectNotebooks))]
         [HarmonyPostfix]
-        private static void ExtendedText()
+        private static void Text()
         {
             string text = "";
             if (BaseGameManager.Instance.FoundNotebooks < BaseGameManager.Instance.Ec.notebookTotal || !BetterHUDComponent.ElevatorsCounter)
@@ -61,7 +61,11 @@ namespace QualityOfPlus.BetterHUD
                 {
                     BaseGameManager.Instance.ec.GetOutOfElevatorsCount().ToString(),
                     "/",
-                    Mathf.Max(BaseGameManager.Instance.ec.GetOutOfElevatorsCount(), BaseGameManager.Instance.Ec.GetElevatorsCount()).ToString(),
+                    (BaseGameManager.Instance.Ec.GetTotalOutOfOrderElevators()+1).ToString(),
+                    " (",
+                    BaseGameManager.Instance.ec.GetElevatorsCount().ToString(),
+                    ")"
+
                 });
                 if (BetterHUDComponent.ExtendedCounterText)
                     text += " " + LocalizationManager.Instance.GetLocalizedText("HUD_Elevators");
