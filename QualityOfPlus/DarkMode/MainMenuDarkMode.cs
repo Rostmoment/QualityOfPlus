@@ -120,7 +120,6 @@ namespace QualityOfPlus.DarkMode
                 __instance.StartCoroutine(ChangeMenu("PickEndlessMap")),
                 __instance.StartCoroutine(ChangeMenu("HideSeekWarning")),
                 __instance.StartCoroutine(ChangeEndlessMenu()),
-                __instance.StartCoroutine(ChangeContinueMenu()),
                 __instance.StartCoroutine(ChangeHideAndSeek())
             };
             while (coroutines.Any(x => x != null))
@@ -157,19 +156,6 @@ namespace QualityOfPlus.DarkMode
                 newGame.GetComponent<TextMeshProUGUI>().color = Color.white;
             }
         }
-        private static IEnumerator ChangeContinueMenu()
-        {
-            GameObject mainContinue = GameObject.Find("MainContinue");
-            if (!mainContinue.IsNullOrDestroyed())
-                mainContinue.GetComponent<TextMeshProUGUI>().color = Color.white;
-            yield return null;
-
-            GameObject mainNew = GameObject.Find("MainNewWarning");
-            if (!mainNew.IsNullOrDestroyed())
-                mainNew.GetComponent<TextMeshProUGUI>().color = Color.white;
-            yield return null;
-        }
-
         private static IEnumerator ChangeMenu(string menu)
         {
             GameObject target = gameObjects.Find(x => x.name == menu);

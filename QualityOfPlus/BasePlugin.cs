@@ -152,6 +152,7 @@ namespace QualityOfPlus
                 BasePlugin.Asset.Add<Sprite>("CrossMark", Resources.FindObjectsOfTypeAll<Sprite>().Find(x => x.name == "YCTP_IndicatorsSheet_1"));
 
 
+            BasePlugin.Asset.Add<Texture2D>("AltChalkboardPit", AssetLoader.TextureFromMod(this, "AltChalkboardPit.png"));
             BasePlugin.Asset.Add<Texture2D>("ElevatorsCounterIconSheet", AssetLoader.TextureFromMod(this, "ElevatorIconSheet.png"));
             BasePlugin.Asset.Add<Texture2D>("NotebooksCounterIconSheet", textures.Find(x => x.name == "NotebookIcon_Sheet").MakeReadableCopy(true));
 
