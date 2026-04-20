@@ -4,9 +4,11 @@ using System.Text;
 using HarmonyLib;
 using MTM101BaldAPI.AssetTools;
 using UnityEngine;
+using MTM101BaldAPI;
 
 namespace QualityOfPlus.BetterMap
 {
+    [ConditionalPatchNever]
     [HarmonyPatch(typeof(Shader))]
     class RoomIconsOnQuickMap
     {
@@ -16,7 +18,6 @@ namespace QualityOfPlus.BetterMap
         [HarmonyPostfix]
         private static void AddRoomIconsToQuickMap(string keyword)
         {
-            Shader.SetGlobalColor("_KEYMAPROOMICONCOLOR", BetterMapComponent.RoomIconsOnQuickMap ? Color.white : Color.clear);
             if (keyword == "_KEYMAPSHOWBACKGROUND" && BetterMapComponent.RoomIconsOnQuickMap)
                 Shader.EnableKeyword("_KEYMAPSHOWBACKGROUND");
         }
