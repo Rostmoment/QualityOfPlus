@@ -19,6 +19,7 @@ using QualityOfPlus.BetterPitstop;
 using MTM101BaldAPI.OptionsAPI;
 using QualityOfPlus.ConfigInOptions;
 using System.IO;
+using QualityOfPlus.Gameplay;
 
 namespace QualityOfPlus
 {
@@ -67,6 +68,7 @@ namespace QualityOfPlus
             qolObject.AddComponent<BetterPitstopComponent>().Initialize();
             qolObject.AddComponent<BetterGameWindowComponent>().Initialize();
             qolObject.AddComponent<DarkModeComponent>().Initialize();
+            qolObject.AddComponent<GameplayComponent>().Initialize();
 
             CustomOptionsCore.OnMenuInitialize += ConfigOptionsMenu.Register;
 
