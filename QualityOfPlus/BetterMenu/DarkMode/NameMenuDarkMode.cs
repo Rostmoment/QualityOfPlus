@@ -5,7 +5,7 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace QualityOfPlus.DarkMode
+namespace QualityOfPlus.BetterMenu.DarkMode
 {
     [HarmonyPatch]
     class NameMenuDarkMode
@@ -15,7 +15,7 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void ApplyDarkMode(NameButton __instance)
         {
-            if (!DarkModeComponent.DarkMode) 
+            if (!BetterMenuComponent.DarkMode) 
                 return;
 
 
@@ -26,7 +26,7 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void ApplyDarkMode(NameManager __instance)
         {
-            if (!DarkModeComponent.DarkMode) 
+            if (!BetterMenuComponent.DarkMode) 
                 return;
 
             Transform parent = __instance.transform.parent;

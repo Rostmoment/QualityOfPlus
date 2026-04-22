@@ -3,6 +3,7 @@ using Mono.Cecil;
 using MTM101BaldAPI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace QualityOfPlus.BetterMap
                 icon.spriteRenderer.sprite = spr;
             icon.gameObject.ConvertToPrefab(true);
             icon.gameObject.layer = LayerMask.NameToLayer("Map");
-            icon.spriteRenderer.material = new Material(Resources.FindObjectsOfTypeAll<MapIcon>().Find(x => x.name == "Icon_Prefab").spriteRenderer.material);
+            icon.spriteRenderer.material = new Material(Resources.FindObjectsOfTypeAll<MapIcon>().First(x => x.name == "Icon_Prefab").spriteRenderer.material);
             cache.Add(name, icon);
             return icon;
         }

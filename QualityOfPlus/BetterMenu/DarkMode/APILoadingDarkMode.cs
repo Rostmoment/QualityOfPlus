@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace QualityOfPlus.DarkMode
+namespace QualityOfPlus.BetterMenu.DarkMode
 {
     [HarmonyPatch(typeof(ModLoadingScreenManager))]
     class APILoadingDarkMode
@@ -16,7 +16,7 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void FixLoadMenuScreen(ModLoadingScreenManager __instance)
         {
-            if (!DarkModeComponent.DarkMode)
+            if (!BetterMenuComponent.DarkMode)
                 return;
 
             __instance.transform.GetComponent<Image>().color = Color.black;

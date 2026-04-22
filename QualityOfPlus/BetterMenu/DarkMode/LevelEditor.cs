@@ -3,12 +3,13 @@ using MTM101BaldAPI;
 using PlusLevelStudio.Menus;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace QualityOfPlus.DarkMode
+namespace QualityOfPlus.BetterMenu.DarkMode
 {
     [ConditionalPatchMod(Compats.LEVEL_STUDIO_GUID)]
     [HarmonyPatch(typeof(EditorModeSelectionMenu))]
@@ -19,11 +20,11 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void Patch()
         {
-            if (!DarkModeComponent.DarkMode)
+            if (!BetterMenuComponent.DarkMode)
                 return;
 
             SceneManager.GetActiveScene().GetRootGameObjects().
-                Find(x => x.name == "EditorModeSelection").transform.Find("BG").GetComponent<Image>().sprite = BasePlugin.Asset.Get<Sprite>("DarkModeEditor");
+                First(x => x.name == "EditorModeSelection").transform.Find("BG").GetComponent<Image>().sprite = BasePlugin.Asset.Get<Sprite>("DarkModeEditor");
         }
     }
 }

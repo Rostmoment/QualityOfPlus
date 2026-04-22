@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
-namespace QualityOfPlus.DarkMode
+namespace QualityOfPlus.BetterMenu.DarkMode
 {
     [HarmonyPatch(typeof(MainMenu))]
     class MainMenuDarkMode
@@ -33,7 +33,7 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void ApplyDarkMode(MainMenu __instance)
         {
-            if (!DarkModeComponent.DarkMode) 
+            if (!BetterMenuComponent.DarkMode) 
                 return;
 
             __instance.transform.Find("Image").GetComponent<Image>().sprite = BasePlugin.Asset.Get<Sprite>("MainMenuDarkMode");
@@ -130,11 +130,11 @@ namespace QualityOfPlus.DarkMode
         }
         private static IEnumerator ChangeHideAndSeek()
         {
-            GameObject target = gameObjects.Find(x => x.name == "HideSeekMenu");
+            GameObject target = gameObjects.FirstOrDefault(x => x.name == "HideSeekMenu");
             while (true)
             {
                 yield return null;
-                target = gameObjects.Find(x => x.name == "HideSeekMenu");
+                target = gameObjects.FirstOrDefault(x => x.name == "HideSeekMenu");
                 if (target != null)
                     break;
             }
@@ -158,11 +158,11 @@ namespace QualityOfPlus.DarkMode
         }
         private static IEnumerator ChangeMenu(string menu)
         {
-            GameObject target = gameObjects.Find(x => x.name == menu);
+            GameObject target = gameObjects.FirstOrDefault(x => x.name == menu);
             while (true)
             {
                 yield return null;
-                target = gameObjects.Find(x => x.name == menu);
+                target = gameObjects.FirstOrDefault(x => x.name == menu);
                 if (target != null)
                     break;
             }
@@ -182,11 +182,11 @@ namespace QualityOfPlus.DarkMode
         }
         private static IEnumerator ChangePickMenu()
         {
-            GameObject target = gameObjects.Find(x => x.name == "PickMode");
+            GameObject target = gameObjects.FirstOrDefault(x => x.name == "PickMode");
             while (true)
             {
                 yield return null;
-                target = gameObjects.Find(x => x.name == "PickMode");
+                target = gameObjects.FirstOrDefault(x => x.name == "PickMode");
                 if (target != null)
                     break;
             }
@@ -209,11 +209,11 @@ namespace QualityOfPlus.DarkMode
 
         private static IEnumerator ChangeEndlessMenu()
         {
-            GameObject target = gameObjects.Find(x => x.name == "EndlessMapOverview");
+            GameObject target = gameObjects.FirstOrDefault(x => x.name == "EndlessMapOverview");
             while (true)
             {
                 yield return null;
-                target = gameObjects.Find(x => x.name == "EndlessMapOverview");
+                target = gameObjects.FirstOrDefault(x => x.name == "EndlessMapOverview");
                 if (target != null)
                     break;
             }

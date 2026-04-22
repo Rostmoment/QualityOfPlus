@@ -3,6 +3,7 @@ using HarmonyLib;
 using MTM101BaldAPI.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace QualityOfPlus.BetterNameMenu
         {
 
             if (!BasePlugin.Asset.Exists<Sprite>("CrossMark"))
-                BasePlugin.Asset.Add<Sprite>("CrossMark", Resources.FindObjectsOfTypeAll<Sprite>().Find(x => x.name == "YCTP_IndicatorsSheet_1"));
+                BasePlugin.Asset.Add<Sprite>("CrossMark", Resources.FindObjectsOfTypeAll<Sprite>().First(x => x.name == "YCTP_IndicatorsSheet_1"));
 
             if (!BetterNameMenuComponent.DeleteButton)
                 return;

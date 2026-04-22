@@ -8,7 +8,6 @@ using QualityOfPlus.BetterHUD;
 using QualityOfPlus.BetterMap;
 using QualityOfPlus.BetterNameMenu;
 using QualityOfPlus.BetterPause;
-using QualityOfPlus.DarkMode;
 using QualityOfPlus.GameWindow;
 using QualityOfPlus.TABSwitch;
 using System.Collections;
@@ -20,6 +19,8 @@ using MTM101BaldAPI.OptionsAPI;
 using QualityOfPlus.ConfigInOptions;
 using System.IO;
 using QualityOfPlus.Gameplay;
+using QualityOfPlus.BetterMenu.DarkMode;
+using System.Linq;
 
 namespace QualityOfPlus
 {
@@ -27,7 +28,7 @@ namespace QualityOfPlus
     {
         public const string NAME = "Quality Of Plus";
         public const string GUID = "rost.moment.baldiplus.qop";
-        public const string VERSION = "1.9";
+        public const string VERSION = "1.9.1";
     }
 
     [BepInDependency(MTM101BaldiDevAPI.ModGUID, BepInDependency.DependencyFlags.HardDependency)]
@@ -67,7 +68,7 @@ namespace QualityOfPlus
             qolObject.AddComponent<BetterHUDComponent>().Initialize();
             qolObject.AddComponent<BetterPitstopComponent>().Initialize();
             qolObject.AddComponent<BetterGameWindowComponent>().Initialize();
-            qolObject.AddComponent<DarkModeComponent>().Initialize();
+            qolObject.AddComponent<BetterMenuComponent>().Initialize();
             qolObject.AddComponent<GameplayComponent>().Initialize();
 
             CustomOptionsCore.OnMenuInitialize += ConfigOptionsMenu.Register;
@@ -151,12 +152,12 @@ namespace QualityOfPlus
             yield return "Loading textures...";
 
             if (!BasePlugin.Asset.Exists<Sprite>("CrossMark"))
-                BasePlugin.Asset.Add<Sprite>("CrossMark", Resources.FindObjectsOfTypeAll<Sprite>().Find(x => x.name == "YCTP_IndicatorsSheet_1"));
+                BasePlugin.Asset.Add<Sprite>("CrossMark", Resources.FindObjectsOfTypeAll<Sprite>().First(x => x.name == "YCTP_IndicatorsSheet_1"));
 
 
             BasePlugin.Asset.Add<Texture2D>("AltChalkboardPit", AssetLoader.TextureFromMod(this, "AltChalkboardPit.png"));
             BasePlugin.Asset.Add<Texture2D>("ElevatorsCounterIconSheet", AssetLoader.TextureFromMod(this, "ElevatorIconSheet.png"));
-            BasePlugin.Asset.Add<Texture2D>("NotebooksCounterIconSheet", textures.Find(x => x.name == "NotebookIcon_Sheet").MakeReadableCopy(true));
+            BasePlugin.Asset.Add<Texture2D>("NotebooksCounterIconSheet", textures.First(x => x.name == "NotebookIcon_Sheet").MakeReadableCopy(true));
 
             BasePlugin.Asset.Add<Sprite>("MainMenuDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "MainMenu.png"));
             BasePlugin.Asset.Add<Sprite>("ExitNotHighlitghedDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "ExitNotHighlitghed.png"));
@@ -172,10 +173,10 @@ namespace QualityOfPlus
 
             BasePlugin.Asset.Add<Sprite>("White", AssetLoader.SpriteFromTexture2D(Texture2D.whiteTexture, 1));
 
-            BasePlugin.Asset.Add<Sprite>("ArrowLeftHigh", sprites.Find(x => x.name == "MenuArrowSheet_0"));
-            BasePlugin.Asset.Add<Sprite>("ArrowLeftUnhigh", sprites.Find(x => x.name == "MenuArrowSheet_2"));
-            BasePlugin.Asset.Add<Sprite>("ArrowRightHigh", sprites.Find(x => x.name == "MenuArrowSheet_1"));
-            BasePlugin.Asset.Add<Sprite>("ArrowRightUnhigh", sprites.Find(x => x.name == "MenuArrowSheet_3"));
+            BasePlugin.Asset.Add<Sprite>("ArrowLeftHigh", sprites.First(x => x.name == "MenuArrowSheet_0"));
+            BasePlugin.Asset.Add<Sprite>("ArrowLeftUnhigh", sprites.First(x => x.name == "MenuArrowSheet_2"));
+            BasePlugin.Asset.Add<Sprite>("ArrowRightHigh", sprites.First(x => x.name == "MenuArrowSheet_1"));
+            BasePlugin.Asset.Add<Sprite>("ArrowRightUnhigh", sprites.First(x => x.name == "MenuArrowSheet_3"));
 
         }
 

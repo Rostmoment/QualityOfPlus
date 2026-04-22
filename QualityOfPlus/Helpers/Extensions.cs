@@ -65,8 +65,6 @@ namespace QualityOfPlus
                 return true;
             return false;
         }
-        public static T Find<T>(this T[] array, Func<T, bool> predicate) => array.Where(predicate).FirstOrDefault();
-
         public static bool CheckForHotKey(this KeyCode keyCode) =>
           (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand)) && Input.GetKeyDown(keyCode);
 

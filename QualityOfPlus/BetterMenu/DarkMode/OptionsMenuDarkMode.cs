@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace QualityOfPlus.DarkMode
+namespace QualityOfPlus.BetterMenu.DarkMode
 {
     class OptionsMenuDarkMode
     {
@@ -38,7 +38,7 @@ namespace QualityOfPlus.DarkMode
 
         public static void ApplyDarkMode(OptionsMenu menu, CustomOptionsHandler handler)
         {
-            if (!DarkModeComponent.DarkMode)
+            if (!BetterMenuComponent.DarkMode)
                 return;
 
 

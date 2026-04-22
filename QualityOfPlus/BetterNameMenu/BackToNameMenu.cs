@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using HarmonyLib;
 using QualityOfPlus.Helpers;
@@ -21,7 +22,7 @@ namespace QualityOfPlus.BetterNameMenu
                 yield return null;
                 try
                 {
-                    button = GameObject.Instantiate(SceneManager.GetActiveScene().GetRootGameObjects().Find(x => x.name == "PickMode").transform.Find("BackButton").gameObject);
+                    button = GameObject.Instantiate(SceneManager.GetActiveScene().GetRootGameObjects().First(x => x.name == "PickMode").transform.Find("BackButton").gameObject);
                     break;
                 }
                 catch (NullReferenceException)

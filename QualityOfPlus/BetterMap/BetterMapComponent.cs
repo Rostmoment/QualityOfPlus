@@ -16,12 +16,14 @@ namespace QualityOfPlus.BetterMap
         private static ConfigEntry<bool> removeMarkerEnable;
         private static ConfigEntry<KeyCode> addRandomMarker;
         private static ConfigEntry<bool> addRandomMarkerEnable;
+
         private static ConfigEntry<bool> roomIconsOnQuickMap;
         private static ConfigEntry<bool> timerOnQuickMap;
+
         private static ConfigEntry<bool> ytpIcon;
         private static ConfigEntry<bool> tapeIcon;
-        private static ConfigEntry<Color> customGridColor;
 
+        private static ConfigEntry<Color> customGridColor;
 
         public static KeyCode AddMarker => addMarker.Value;
         public static bool AddMarkerEnable => addMarkerEnable.Value;
@@ -29,10 +31,13 @@ namespace QualityOfPlus.BetterMap
         public static bool RemoveMarkerEnable => removeMarkerEnable.Value;
         public static KeyCode AddRandomMarker => addRandomMarker.Value;
         public static bool AddRandomMarkerEnable => addRandomMarkerEnable.Value;
+
         public static bool RoomIconsOnQuickMap => roomIconsOnQuickMap.Value;
         public static bool TimerOnQuickMap => timerOnQuickMap.Value;
+
         public static bool YTPIcon => ytpIcon.Value;
         public static bool TapeIcon => tapeIcon.Value;
+
         public static Color CustomGridColor => customGridColor.Value;
 
         public override void Initialize()

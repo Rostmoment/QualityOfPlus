@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace QualityOfPlus.DarkMode
+namespace QualityOfPlus.BetterMenu.DarkMode
 {
     [HarmonyPatch]
     class WinningScreens
@@ -15,7 +15,7 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void ApplyDarkMode(TutorialGameManager __instance)
         {
-            if (!DarkModeComponent.DarkMode)
+            if (!BetterMenuComponent.DarkMode)
                 return;
 
             __instance.resultsScreen.transform.Find("BG").GetComponent<Image>().color = UnityEngine.Color.black;
@@ -26,7 +26,7 @@ namespace QualityOfPlus.DarkMode
         [HarmonyPostfix]
         private static void ApplyDarkMode(ChallengeWin __instance)
         {
-            if (!DarkModeComponent.DarkMode)
+            if (!BetterMenuComponent.DarkMode)
                 return;
 
             Transform canvas = __instance.transform.Find("Canvas");
