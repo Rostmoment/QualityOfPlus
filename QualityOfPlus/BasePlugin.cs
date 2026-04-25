@@ -22,6 +22,7 @@ using QualityOfPlus.Gameplay;
 using QualityOfPlus.BetterMenu.DarkMode;
 using System.Linq;
 using QualityOfPlus.MoreIconsOnMap;
+using QualityOfPlus.TransitionManager;
 
 namespace QualityOfPlus
 {
@@ -72,7 +73,8 @@ namespace QualityOfPlus
             qolObject.AddComponent<BetterMenuComponent>().Initialize();
             qolObject.AddComponent<GameplayComponent>().Initialize();
             qolObject.AddComponent<MoreIconsComponent>().Initialize();
-
+            qolObject.AddComponent<TransitionManagerComponent>().Initialize();
+            
             CustomOptionsCore.OnMenuInitialize += ConfigOptionsMenu.Register;
 
 
