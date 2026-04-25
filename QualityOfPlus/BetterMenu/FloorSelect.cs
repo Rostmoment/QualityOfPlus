@@ -31,6 +31,8 @@ namespace QualityOfPlus.BetterMenu
             while (true)
             {
                 yield return null;
+                gameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
                 target = gameObjects.FirstOrDefault(x => x.name == "HideSeekMenu");
                 if (target != null)
                     break;

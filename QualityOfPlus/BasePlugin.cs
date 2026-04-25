@@ -21,6 +21,7 @@ using System.IO;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.BetterMenu.DarkMode;
 using System.Linq;
+using QualityOfPlus.MoreIconsOnMap;
 
 namespace QualityOfPlus
 {
@@ -70,6 +71,7 @@ namespace QualityOfPlus
             qolObject.AddComponent<BetterGameWindowComponent>().Initialize();
             qolObject.AddComponent<BetterMenuComponent>().Initialize();
             qolObject.AddComponent<GameplayComponent>().Initialize();
+            qolObject.AddComponent<MoreIconsComponent>().Initialize();
 
             CustomOptionsCore.OnMenuInitialize += ConfigOptionsMenu.Register;
 
@@ -170,6 +172,7 @@ namespace QualityOfPlus
 
             BasePlugin.Asset.Add<Sprite>("YTPMapIcon", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 70, "MapIcons", "YTPIcon.png"));
             BasePlugin.Asset.Add<Sprite>("TapePlayerIcon", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 22 , "MapIcons", "TapePlayerIcon.png"));
+            BasePlugin.Asset.Add<Sprite>("StickerIcon", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 22, "MapIcons", "StickerIcon.png"));
 
             BasePlugin.Asset.Add<Sprite>("White", AssetLoader.SpriteFromTexture2D(Texture2D.whiteTexture, 1));
 

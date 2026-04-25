@@ -1,13 +1,14 @@
 ﻿using HarmonyLib;
 using Mono.Cecil;
 using MTM101BaldAPI;
+using QualityOfPlus.BetterMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace QualityOfPlus.BetterMap
+namespace QualityOfPlus.MoreIconsOnMap
 {
     [HarmonyPatch]
     class MoreIcons
@@ -35,7 +36,7 @@ namespace QualityOfPlus.BetterMap
         [HarmonyPostfix]
         private static void CustomIcons(Map map)
         {
-            if (BetterMapComponent.TapeIcon)
+            if (MoreIconsComponent.TapePlayer)
             {
                 foreach (TapePlayer tape in UnityEngine.Object.FindObjectsOfType<TapePlayer>())
                 {
@@ -49,13 +50,16 @@ namespace QualityOfPlus.BetterMap
         [HarmonyPatch(typeof(Pickup), "Start")]
         [HarmonyPatch(typeof(Pickup), "AssignItem")]
         [HarmonyPostfix]
-        private static void YRPIcon(Pickup __instance)
+        private static void AddIcons(Pickup __instance)
         {
-            if (__instance?.icon?.spriteRenderer == null || !BetterMapComponent.YTPIcon)
+            if (__instance?.icon?.spriteRenderer == null)
                 return;
 
-            if (__instance.item.itemType == Items.Points) 
+            if (__instance.item.itemType == Items.Points && MoreIconsComponent.YTP) 
                 __instance.icon.spriteRenderer.sprite = BasePlugin.Asset.Get<Sprite>("YTPMapIcon");
+
+            if (__instance.item.itemType == Items.StickerPack && MoreIconsComponent.Sticker)
+                __instance.icon.spriteRenderer.sprite = BasePlugin.Asset.Get<Sprite>("StickerIcon");
         }
     }
 }

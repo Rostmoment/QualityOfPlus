@@ -20,9 +20,6 @@ namespace QualityOfPlus.BetterMap
         private static ConfigEntry<bool> roomIconsOnQuickMap;
         private static ConfigEntry<bool> timerOnQuickMap;
 
-        private static ConfigEntry<bool> ytpIcon;
-        private static ConfigEntry<bool> tapeIcon;
-
         private static ConfigEntry<Color> customGridColor;
 
         public static KeyCode AddMarker => addMarker.Value;
@@ -34,9 +31,6 @@ namespace QualityOfPlus.BetterMap
 
         public static bool RoomIconsOnQuickMap => roomIconsOnQuickMap.Value;
         public static bool TimerOnQuickMap => timerOnQuickMap.Value;
-
-        public static bool YTPIcon => ytpIcon.Value;
-        public static bool TapeIcon => tapeIcon.Value;
 
         public static Color CustomGridColor => customGridColor.Value;
 
@@ -54,9 +48,6 @@ namespace QualityOfPlus.BetterMap
             roomIconsOnQuickMap = CreateConfig("Room Icons On Quick Map", true, "If true, you will be able too see room icons even on quick map");
 
             timerOnQuickMap = CreateConfig("Show Timer On Quick Map", true, "If true, there will be text on quick map that shows timer before lights out event");
-
-            ytpIcon = CreateConfig("Custom Icon For YTP", false, "Adds YTP icon");
-            tapeIcon = CreateConfig("Custom Icon For Tape Player", false, "Adds tape player icon");
 
             customGridColor = CreateConfig("Custom Grid Color", new Color(0, 0.3922f, 0, 1), "Custom color for map grid\nIn game color by default");
         }
