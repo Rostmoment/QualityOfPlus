@@ -30,7 +30,7 @@ namespace QualityOfPlus
     {
         public const string NAME = "Quality Of Plus";
         public const string GUID = "rost.moment.baldiplus.qop";
-        public const string VERSION = "1.9.1";
+        public const string VERSION = "1.9.2";
     }
 
     [BepInDependency(MTM101BaldiDevAPI.ModGUID, BepInDependency.DependencyFlags.HardDependency)]
