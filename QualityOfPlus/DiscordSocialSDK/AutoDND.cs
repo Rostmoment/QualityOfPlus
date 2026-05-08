@@ -18,6 +18,9 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void SetDND()
         {
+            if (!DiscordSocialSDKComponent.client.IsReady)
+                return;
+
             previousStatus = DiscordSocialSDKComponent.client.GetOnlineStatus();
 
             if (previousStatus == StatusType.Invisible || !DiscordSocialSDKComponent.AutoDND)
@@ -30,6 +33,9 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void RemoveDND()
         {
+            if (!DiscordSocialSDKComponent.client.IsReady)
+                return;
+
             if (previousStatus == null)
                 return;
 
