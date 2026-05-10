@@ -13,9 +13,9 @@ namespace QualityOfPlus.TransitionManager
         private static ConfigEntry<float> addend;
         private static ConfigEntry<CustomUiTransition> transition;
 
-        public static float Multiplier => multiplier.Value;
-        public static float Addend => addend.Value;
-        public static CustomUiTransition Transition => transition.Value;
+        public static float Multiplier => multiplier.ValueOrDefault(1);
+        public static float Addend => addend.ValueOrDefault(0);
+        public static CustomUiTransition Transition => transition.ValueOrDefault(CustomUiTransition.SameAsDefault);
 
         public override void Initialize()
         {

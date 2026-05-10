@@ -28,25 +28,6 @@ namespace QualityOfPlus
             
             return config.Value;
         }
-        public static bool TexturesAreEqual(this Texture2D tex1, Texture2D tex2)
-        {
-            if (tex1 == null)
-                return tex2 == null;
-            if (tex2 == null)
-                return false;
-
-            if (tex1.width != tex2.width || tex1.height != tex2.height)
-                return false;
-
-            Color[] pixels1 = tex1.GetPixels();
-            Color[] pixels2 = tex2.GetPixels();
-            for (int i = 0; i < pixels1.Length; i++)
-            {
-                if (pixels1[i] != pixels2[i])
-                    return false;
-            }
-            return true;
-        }
         public static bool IsNullOrDestroyed(this object obj)
         {
             try
