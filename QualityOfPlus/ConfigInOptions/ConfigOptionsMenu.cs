@@ -63,7 +63,7 @@ namespace QualityOfPlus.ConfigInOptions
                     category.OnApplyButtonPressed();
             });
 
-            CreateText("UseWheel", LocalizationManager.Instance.GetLocalizedText("UseMMB"), new Vector3(-20, -160),
+            CreateText("UseWheel", LocalizationManager.Instance.GetLocalizedText("QOP_USE_MOUSE_WHEEL"), new Vector3(-20, -160),
                 BaldiFonts.ComicSans24, TextAlignmentOptions.Left, new Vector2(300, 20), Color.red);
         }
 

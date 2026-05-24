@@ -28,13 +28,13 @@ namespace QualityOfPlus.BetterPause
                     return;
 
                 restart = GameObject.Instantiate(options);
-                restart.AddComponent<MonoBehaviourBuilder>().SetOnUpdate(x => x.gameObject.GetComponent<StandardMenuButton>().text.text = LocalizationManager.Instance.GetLocalizedText("Restart"));
+                restart.AddComponent<MonoBehaviourBuilder>().SetOnUpdate(x => x.gameObject.GetComponent<StandardMenuButton>().text.text = LocalizationManager.Instance.GetLocalizedText("QOP_RESTART"));
                 restart.transform.SetParent(screen.Find("Main"));
                 restart.name = "RestartButton";
 
                 GameObject confirm = GameObject.Instantiate(screen.Find("QuitConfirm").gameObject);
                 StandardMenuButton button = restart.GetComponent<StandardMenuButton>();
-                restart.GetComponent<TextLocalizer>().GetLocalizedText("Restart");
+                restart.GetComponent<TextLocalizer>().GetLocalizedText("QOP_RESTART");
                 button.InitializeAllEvents();
                 button.OnPress.AddListener(() =>
                 {
@@ -52,7 +52,7 @@ namespace QualityOfPlus.BetterPause
 
                 confirm.transform.Find("Text").gameObject.AddComponent<MonoBehaviourBuilder>().SetOnStart(x => {
                     TextMeshProUGUI text = x.GetComponent<TextMeshProUGUI>();
-                    text.text = LocalizationManager.Instance.GetLocalizedText("RestartConfirm");
+                    text.text = LocalizationManager.Instance.GetLocalizedText("QOP_RESTART_CONFIRM");
                     text.rectTransform.sizeDelta += new Vector2(100, 0);
                 });
 

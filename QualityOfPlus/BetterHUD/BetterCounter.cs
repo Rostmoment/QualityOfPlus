@@ -68,7 +68,7 @@ namespace QualityOfPlus.BetterHUD
 
                 });
                 if (BetterHUDComponent.ExtendedCounterText)
-                    text += " " + LocalizationManager.Instance.GetLocalizedText("HUD_Elevators");
+                    text += " " + LocalizationManager.Instance.GetLocalizedText("QOP_HUD_ELEVATORS");
             }
             CoreGameManager.Instance.GetHud(0).UpdateNotebookText(0, text, !PlayerFileManager.Instance.authenticMode);
         }

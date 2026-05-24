@@ -40,7 +40,7 @@ namespace QualityOfPlus.BetterPause
             CoreGameManager.Instance.Pause(false);
 
             if (CoreGameManager.Instance.Paused)
-                CoreGameManager.Instance.GetHud(0).SetTooltip(LocalizationManager.Instance.GetLocalizedText("PausedWithoutScreen"));
+                CoreGameManager.Instance.GetHud(0).SetTooltip(LocalizationManager.Instance.GetLocalizedText("QOP_PAUSED_WITHOUT_SCREEN"));
         }
 
         [HarmonyPatch(typeof(CoreGameManager), nameof(CoreGameManager.Pause))]
