@@ -26,17 +26,6 @@ namespace QualityOfPlus.DiscordSocialSDK
 
         private static void Clear() => DiscordSocialSDKComponent.rpc.Wipe();
 
-        private static void ResetInfo()
-        {
-            DiscordSocialSDKComponent.rpc.SetInfo(
-                DiscordSocialSDKComponent.rpc.CurrentName ?? string.Empty,
-                string.Empty,
-                string.Empty,
-                string.Empty,
-                string.Empty
-            );
-        }
-
         private static void SetMain()
         {
             if (!DiscordSocialSDKComponent.EnableDiscordRPC)
@@ -78,13 +67,8 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void LoadingMods()
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC) 
-            { 
-                Clear(); 
-                return; 
-            }
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_LOADING_MODS")
@@ -104,13 +88,8 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void FinishedLoadingMods()
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC) 
-            { 
-                Clear(); 
-                return; 
-            }
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_SELECT_ACCOUNT")
@@ -128,13 +107,8 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void InMenu()
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC) 
-            { 
-                Clear();
-                return;
-            }
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_MAIN_MENU")
@@ -153,13 +127,8 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void InLevelStudioEditor()
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_LEVEL_EDITOR"),
@@ -171,7 +140,7 @@ namespace QualityOfPlus.DiscordSocialSDK
                 PLUS_ICON,
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LEVEL_STUDIO_ICON,
-                LocalizationManager.Instance.GetLocalizedText("QOP_USING_LEVELSTUDIO")
+                "Using Level Studio"
             );
 
             SetMain();
@@ -182,13 +151,7 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void InGame()
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
-
-            ResetInfo();
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
             if (BaseGameManager.Instance.FoundNotebooks < BaseGameManager.Instance.Ec.notebookTotal)
             {
@@ -253,13 +216,8 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void InPitstop()
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PITSTOP"),
@@ -279,13 +237,8 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void InEndlessGame(EndlessGameManager __instance)
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
+            if (!DiscordSocialSDKComponent.EnableDiscordRPC) { Clear(); return; }
 
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 string.Format(LocalizationManager.Instance.GetLocalizedText("QOP_RPC_SEED"), CoreGameManager.Instance?.Seed()),
@@ -307,13 +260,6 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void InTutorial(TutorialGameManager __instance)
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
-
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_TUTORIAL")
@@ -342,13 +288,6 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void Campfire(Minigame_Campfire __instance)
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
-
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_CAMPFIRE"),
@@ -369,13 +308,6 @@ namespace QualityOfPlus.DiscordSocialSDK
         [HarmonyPostfix]
         private static void Picnic(Minigame_Picnic __instance)
         {
-            if (!DiscordSocialSDKComponent.EnableDiscordRPC)
-            {
-                Clear();
-                return;
-            }
-
-            ResetInfo();
             DiscordSocialSDKComponent.rpc.SetInfo(
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PLAYING_PLUS"),
                 LocalizationManager.Instance.GetLocalizedText("QOP_RPC_PICNIC")
