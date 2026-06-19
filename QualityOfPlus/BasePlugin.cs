@@ -13,6 +13,7 @@ using System.Linq;
 using QualityOfPlus.ConditionalPatches;
 using QualityOfPlus.Interfaces;
 using System.Collections.Generic;
+using QualityOfPlus.BetterPause;
 
 namespace QualityOfPlus
 {
@@ -37,11 +38,11 @@ namespace QualityOfPlus
 
         private void Awake()
         {
-            Harmony = new Harmony(MyPluginInfo.GUID);
-            Harmony.PatchAllConditionalFixed();
             Asset = new AssetManager();
             Logger = base.Logger;
             Instance = this;
+            Harmony = new Harmony(MyPluginInfo.GUID);
+            Harmony.PatchAllConditionalFixed();
 
             AssetLoader.LoadLocalizationFolder(Path.Combine(AssetLoader.GetModPath(this), "Languages"), Language.English);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIStart(), LoadingEventOrder.Start);
@@ -49,7 +50,12 @@ namespace QualityOfPlus
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIPost(), LoadingEventOrder.Post);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIFinal(), LoadingEventOrder.Final);
 
-            
+
+            GameObject qopObject = new GameObject("Quality Of Plus");
+            qopObject.AddComponent<QOPEvents>();
+
+            QOPManager.Instance.RegisterCategory<BetterPauseCategory>(Info, Config);
+
 
             #region adding assets for name menu because API loads them on name menu, but I need them earlier
             BasePlugin.Asset.Add<Sprite>("NameEntryDarkModeBG", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "NameEntry.png"));
@@ -62,49 +68,81 @@ namespace QualityOfPlus
         private IEnumerator APIStart()
         {
             IOnAPIStart[] starts = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIStart>().ToArray();
-            yield return starts.Length;
-
-            foreach (IOnAPIStart start in starts)
+            if (starts.Length == 0)
             {
-                IEnumerator inner = start.APIStartAction();
-                while (inner.MoveNext())
-                    yield return inner.Current;
+                yield return 1;
+                yield return $"Calling {nameof(APIStart)}";
+            }
+            else
+            {
+                yield return starts.Length;
+
+                foreach (IOnAPIStart start in starts)
+                {
+                    IEnumerator inner = start.APIStartAction();
+                    while (inner.MoveNext())
+                        yield return inner.Current;
+                }
             }
         }
         private IEnumerator APIPre()
         {
             IOnAPIPre[] pres = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIPre>().ToArray();
-            yield return pres.Length;
-
-            foreach (IOnAPIPre start in pres)
+            if (pres.Length == 0)
             {
-                IEnumerator inner = start.APIPreAction();
-                while (inner.MoveNext())
-                    yield return inner.Current;
+                yield return 1;
+                yield return $"Calling {nameof(APIPost)}";
+            }
+            else
+            {
+                yield return pres.Length;
+
+                foreach (IOnAPIPre start in pres)
+                {
+                    IEnumerator inner = start.APIPreAction();
+                    while (inner.MoveNext())
+                        yield return inner.Current;
+                }
             }
         }
         private IEnumerator APIPost()
         {
             IOnAPIPost[] posts = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIPost>().ToArray();
-            yield return posts.Length;
-
-            foreach (IOnAPIPost start in posts)
+            if (posts.Length == 0)
             {
-                IEnumerator inner = start.APIPostAction();
-                while (inner.MoveNext())
-                    yield return inner.Current;
+                yield return 1;
+                yield return $"Calling {nameof(APIPost)}";
+            }
+            else
+            {
+                yield return posts.Length;
+
+                foreach (IOnAPIPost start in posts)
+                {
+                    IEnumerator inner = start.APIPostAction();
+                    while (inner.MoveNext())
+                        yield return inner.Current;
+                }
             }
         }
         private IEnumerator APIFinal()
         {
             IOnAPIFinal[] finals = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIFinal>().ToArray();
-            yield return finals.Length;
-
-            foreach (IOnAPIFinal start in finals)
+            if (finals.Length == 0)
             {
-                IEnumerator inner = start.APIFinalAction();
-                while (inner.MoveNext())
-                    yield return inner.Current;
+                yield return 1;
+                yield return $"Calling {nameof(APIFinal)}";
+            }
+            else
+            {
+                yield return finals.Length;
+
+                foreach (IOnAPIFinal start in finals)
+                {
+                    IEnumerator inner = start.APIFinalAction();
+                    while (inner.MoveNext())
+                        yield return inner.Current;
+                }
             }
         }
     }

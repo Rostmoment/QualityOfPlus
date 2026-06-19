@@ -44,5 +44,8 @@ namespace QualityOfPlus
         public T GetCategory<T>() where T : QOPCategory => categories.OfType<T>().FirstOrDefault();
 
         public IEnumerable<QOPFeature> GetAllFeatures() => categories.SelectMany(c => c.Features);
+        public QOPFeature GetFeature(string id) => GetAllFeatures().FirstOrDefault(x => x.ID.Equals(id, StringComparison.OrdinalIgnoreCase));
+        public T GetFeature<T>(string id) where T : QOPFeature => GetAllFeatures().OfType<T>().FirstOrDefault(x => x.ID.Equals(id, StringComparison.OrdinalIgnoreCase));
+        public T GetFeature<T>() where T : QOPFeature => GetAllFeatures().OfType<T>().FirstOrDefault();
     }
 }

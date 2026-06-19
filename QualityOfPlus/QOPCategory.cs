@@ -79,6 +79,9 @@ namespace QualityOfPlus
             features.Add(t);
             t.PostInitialize(this);
 
+            if (t is IUpdatable updatable)
+                QOPEvents.Instance.AddUpdatable(updatable);
+
             return t;
         }
 

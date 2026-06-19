@@ -32,7 +32,7 @@ namespace QualityOfPlus.ConditionalPatches
 
             if (patch.info.methodName != null)
             {
-                if (TargetMethodIsNull)
+                if (!TargetMethodIsNull)
                     throw new InvalidOperationException($"Member {memberName} has two target methods to patch!");
 
                 TargetMethod = patch.info.methodName;
@@ -40,7 +40,7 @@ namespace QualityOfPlus.ConditionalPatches
 
             if (patch.info.argumentTypes != null)
             {
-                if (ArgumentTypesAreNull)
+                if (!ArgumentTypesAreNull)
                     throw new InvalidOperationException($"Member {memberName} has two argument types arrays!");
 
                 ArgumentTypes = patch.info.argumentTypes;
@@ -78,6 +78,36 @@ namespace QualityOfPlus.ConditionalPatches
             result.ArgumentTypes = first.ArgumentTypes ?? second.ArgumentTypes;
 
             return result;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("PatchInfoData { ");
+
+            sb.Append($"TargetType: {(TargetType != null ? TargetType.FullName : "null")}, ");
+
+            sb.Append($"TargetMethod: {(!TargetMethodIsNull ? $"\"{TargetMethod}\"" : "null")}, ");
+
+            sb.Append("ArgumentTypes: ");
+            if (ArgumentTypes != null)
+            {
+                sb.Append("[");
+                List<string> argTypeNames = new List<string>();
+                foreach (var t in ArgumentTypes)
+                {
+                    argTypeNames.Add(t?.FullName ?? "null");
+                }
+                sb.Append(string.Join(", ", argTypeNames));
+                sb.Append("]");
+            }
+            else
+            {
+                sb.Append("null");
+            }
+
+            sb.Append(" }");
+            return sb.ToString();
         }
     }
 }

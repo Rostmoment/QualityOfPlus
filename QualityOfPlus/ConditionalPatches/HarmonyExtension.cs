@@ -9,13 +9,18 @@ namespace QualityOfPlus.ConditionalPatches
 {
     static class HarmonyExtension
     {
+        private static BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+
         public static void PatchAllConditionalFixed(this Harmony harmony)
         {
             Assembly assembly = typeof(BasePlugin).Assembly;
 
             foreach (Type type in assembly.GetTypes())
             {
-                bool shouldPatchClass = true;
+                if (type == null)
+                    continue;
+
+                bool shouldPatchClass = false;
                 List<QOPConditionalPatch> conditionsClass = new List<QOPConditionalPatch>();
 
                 PatchInfoData classPatchData = new PatchInfoData();
@@ -27,6 +32,7 @@ namespace QualityOfPlus.ConditionalPatches
 
                     if (Is<HarmonyPatch>(cad))
                     {
+                        shouldPatchClass = true;
                         HarmonyPatch patch = AttributeFrom<HarmonyPatch>(cad);
                         classPatchData.Merge(patch, type.FullName);
                     }
@@ -38,11 +44,16 @@ namespace QualityOfPlus.ConditionalPatches
                 if (!shouldPatchClass)
                     continue;
 
-                foreach (MethodInfo method in type.GetMethods())
+                BasePlugin.Logger.LogInfo(type.FullName);
+
+                foreach (MethodInfo method in type.GetMethods(flags))
                 {
+                    if (method == null)
+                        continue;
+
                     string memberName = $"{type.FullName}.{method.Name}";
 
-                    bool shouldPatchMethod = true;
+                    bool shouldPatchMethod = false;
                     List<QOPConditionalPatch> conditionsMethod = new List<QOPConditionalPatch>();
 
                     List<PatchInfoData> methodPatchDatas = new List<PatchInfoData>();
@@ -60,6 +71,7 @@ namespace QualityOfPlus.ConditionalPatches
 
                         if (Is<HarmonyPatch>(cad))
                         {
+                            shouldPatchMethod = true;
                             HarmonyPatch patch = AttributeFrom<HarmonyPatch>(cad);
                             PatchInfoData data = new PatchInfoData();
                             data.Merge(patch, memberName);
@@ -97,6 +109,7 @@ namespace QualityOfPlus.ConditionalPatches
                     {
                         PatchInfoData merged = PatchInfoData.Merge(data, classPatchData, memberName);
                         MethodInfo original = merged.GetMethod();
+                        BasePlugin.Logger.LogInfo(merged);
                         Patch(harmony, original, method, isPrefix, isPostfix, isTranspiler, isFinializer, isILManipulator);
                     }
                 }
