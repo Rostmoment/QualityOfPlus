@@ -4,25 +4,13 @@ using HarmonyLib;
 using BepInEx.DiscordSocialSDK;
 using MTM101BaldAPI.AssetTools;
 using MTM101BaldAPI.Registers;
-using QualityOfPlus.BetterHUD;
-using QualityOfPlus.BetterMap;
-using QualityOfPlus.BetterNameMenu;
-using QualityOfPlus.BetterPause;
-using QualityOfPlus.GameWindow;
-using QualityOfPlus.TABSwitch;
 using System.Collections;
 using UnityEngine;
 using MTM101BaldAPI;
-using QualityOfPlus.BetterElevator;
-using QualityOfPlus.BetterPitstop;
 using MTM101BaldAPI.OptionsAPI;
-using QualityOfPlus.ConfigInOptions;
 using System.IO;
-using QualityOfPlus.Gameplay;
-using QualityOfPlus.BetterMenu.DarkMode;
 using System.Linq;
-using QualityOfPlus.MoreIconsOnMap;
-using QualityOfPlus.TransitionManager;
+using QualityOfPlus.ConditionalPatches;
 
 namespace QualityOfPlus
 {
@@ -49,7 +37,7 @@ namespace QualityOfPlus
         private void Awake()
         {
             Harmony = new Harmony(MyPluginInfo.GUID);
-            Harmony.PatchAllConditionals();
+            Harmony.PatchAllConditionalFixed();
             Asset = new AssetManager();
             Logger = base.Logger;
             Instance = this;
