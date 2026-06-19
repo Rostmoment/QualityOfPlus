@@ -11,6 +11,8 @@ using MTM101BaldAPI.OptionsAPI;
 using System.IO;
 using System.Linq;
 using QualityOfPlus.ConditionalPatches;
+using QualityOfPlus.Interfaces;
+using System.Collections.Generic;
 
 namespace QualityOfPlus
 {
@@ -42,7 +44,6 @@ namespace QualityOfPlus
             Instance = this;
 
             AssetLoader.LoadLocalizationFolder(Path.Combine(AssetLoader.GetModPath(this), "Languages"), Language.English);
-            LoadingEvents.RegisterOnAssetsLoaded(Info, LoadAssets(), LoadingEventOrder.Pre);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIStart(), LoadingEventOrder.Start);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIPre(), LoadingEventOrder.Pre);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIPost(), LoadingEventOrder.Post);
@@ -50,20 +51,7 @@ namespace QualityOfPlus
 
             
 
-
-            CustomOptionsCore.OnMenuInitialize += ConfigOptionsMenu.Register;
-
-
-            if (Compats.DiscordSDKInstalled)
-                qolObject.AddComponent<DiscordSocialSDK.DiscordSocialSDKComponent>().Initialize();
-            else
-                MTM101BaldiDevAPI.AddWarningScreen("<color=red>Discord Social SDK for BepInEx is not installed!</color>\nDiscord features of Quality Of Plus will be disabled.\nPlease install Discord Social SDK to enable them.", false);
-
-
-            DontDestroyOnLoad(qolObject);
-
             #region adding assets for name menu because API loads them on name menu, but I need them earlier
-
             BasePlugin.Asset.Add<Sprite>("NameEntryDarkModeBG", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "NameEntry.png"));
             BasePlugin.Asset.Add<Sprite>("DarkModeEditor", AssetLoader.SpriteFromMod(BasePlugin.Instance, Vector2.one / 2f, 1f, "DarkMode", "Editor.png"));
 
@@ -73,94 +61,51 @@ namespace QualityOfPlus
 
         private IEnumerator APIStart()
         {
-            BaseQOLThing[] components = qolObject.GetComponents<BaseQOLThing>();
-            yield return components.Length;
+            IOnAPIStart[] starts = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIStart>().ToArray();
+            yield return starts.Length;
 
-            foreach (BaseQOLThing component in components)
+            foreach (IOnAPIStart start in starts)
             {
-                IEnumerator inner = component.OnAPIStart();
+                IEnumerator inner = start.APIStartAction();
                 while (inner.MoveNext())
                     yield return inner.Current;
             }
         }
         private IEnumerator APIPre()
         {
-            BaseQOLThing[] components = qolObject.GetComponents<BaseQOLThing>();
-            yield return components.Length;
+            IOnAPIPre[] pres = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIPre>().ToArray();
+            yield return pres.Length;
 
-            foreach (BaseQOLThing component in components)
+            foreach (IOnAPIPre start in pres)
             {
-                IEnumerator inner = component.OnAPIPre();
+                IEnumerator inner = start.APIPreAction();
                 while (inner.MoveNext())
                     yield return inner.Current;
             }
         }
         private IEnumerator APIPost()
         {
-            BaseQOLThing[] components = qolObject.GetComponents<BaseQOLThing>();
-            yield return components.Length;
+            IOnAPIPost[] posts = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIPost>().ToArray();
+            yield return posts.Length;
 
-            foreach (BaseQOLThing component in components)
+            foreach (IOnAPIPost start in posts)
             {
-                IEnumerator inner = component.OnAPIPost();
+                IEnumerator inner = start.APIPostAction();
                 while (inner.MoveNext())
                     yield return inner.Current;
             }
         }
         private IEnumerator APIFinal()
         {
-            BaseQOLThing[] components = qolObject.GetComponents<BaseQOLThing>();
-            yield return components.Length;
+            IOnAPIFinal[] finals = QOPManager.Instance.GetAllFeatures().OfType<IOnAPIFinal>().ToArray();
+            yield return finals.Length;
 
-            foreach (BaseQOLThing component in components)
+            foreach (IOnAPIFinal start in finals)
             {
-                IEnumerator inner = component.OnAPIFinal();
+                IEnumerator inner = start.APIFinalAction();
                 while (inner.MoveNext())
                     yield return inner.Current;
-                
             }
         }
-
-        private IEnumerator LoadAssets()
-        {
-            AudioClip[] clips = Resources.FindObjectsOfTypeAll<AudioClip>();
-            Texture2D[] textures = Resources.FindObjectsOfTypeAll<Texture2D>();
-            Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
-
-            yield return 1;
-
-            yield return "Loading textures...";
-
-            if (!BasePlugin.Asset.Exists<Sprite>("CrossMark"))
-                BasePlugin.Asset.Add<Sprite>("CrossMark", Resources.FindObjectsOfTypeAll<Sprite>().First(x => x.name == "YCTP_IndicatorsSheet_1"));
-
-
-            BasePlugin.Asset.Add<Texture2D>("AltChalkboardPit", AssetLoader.TextureFromMod(this, "AltChalkboardPit.png"));
-            BasePlugin.Asset.Add<Texture2D>("ElevatorsCounterIconSheet", AssetLoader.TextureFromMod(this, "ElevatorIconSheet.png"));
-            BasePlugin.Asset.Add<Texture2D>("NotebooksCounterIconSheet", textures.First(x => x.name == "NotebookIcon_Sheet").MakeReadableCopy(true));
-
-            BasePlugin.Asset.Add<Sprite>("MainMenuDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "MainMenu.png"));
-            BasePlugin.Asset.Add<Sprite>("ExitNotHighlitghedDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "ExitNotHighlitghed.png"));
-            BasePlugin.Asset.Add<Sprite>("ExitHighlitghedDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "ExitHighlitghed.png"));
-
-            BasePlugin.Asset.Add<Sprite>("OptionsMenuDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "OptionsMenu.png"));
-            BasePlugin.Asset.Add<Sprite>("WhiteCheckbox", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "WhiteCheckBox.png"));
-
-            BasePlugin.Asset.Add<Sprite>("ChallengeWinDarkMode", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "ChallengeWin.png"));
-
-            BasePlugin.Asset.Add<Sprite>("YTPMapIcon", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 70, "MapIcons", "YTPIcon.png"));
-            BasePlugin.Asset.Add<Sprite>("TapePlayerIcon", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 22 , "MapIcons", "TapePlayerIcon.png"));
-            BasePlugin.Asset.Add<Sprite>("StickerIcon", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 22, "MapIcons", "StickerIcon.png"));
-
-            BasePlugin.Asset.Add<Sprite>("White", AssetLoader.SpriteFromTexture2D(Texture2D.whiteTexture, 1));
-
-            BasePlugin.Asset.Add<Sprite>("ArrowLeftHigh", sprites.First(x => x.name == "MenuArrowSheet_0"));
-            BasePlugin.Asset.Add<Sprite>("ArrowLeftUnhigh", sprites.First(x => x.name == "MenuArrowSheet_2"));
-            BasePlugin.Asset.Add<Sprite>("ArrowRightHigh", sprites.First(x => x.name == "MenuArrowSheet_1"));
-            BasePlugin.Asset.Add<Sprite>("ArrowRightUnhigh", sprites.First(x => x.name == "MenuArrowSheet_3"));
-
-        }
-
-
     }
 }

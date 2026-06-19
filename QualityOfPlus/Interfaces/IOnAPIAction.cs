@@ -5,42 +5,71 @@ using System.Text;
 
 namespace QualityOfPlus.Interfaces
 {
+    /// <summary>
+    /// Implement this on your <see cref="QOPFeature"/> to run code during <b>Quality Of Plus's own</b>
+    /// loading sequence at the <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Pre"/> stage.<br/>
+    /// This fires when QOP itself is loading, not your mod's own loading events —
+    /// QOP calls <see cref="APIPreAction"/> automatically once your feature is registered,
+    /// you don't call it yourself.
+    /// </summary>
     public interface IOnAPIPre
     {
         /// <summary>
-        /// Action to execute in <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Pre"/><br>
-        /// Everything must be done in one yield keyword, otherwise game will softlock on loading screen<br>
-        /// QOP will execute action itself, no need to call it manually
+        /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Pre"/> stage.<br/>
+        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// QOP invokes this for you — do not call it manually.
         /// </summary>
-        IEnumerator Action();
+        IEnumerator APIPreAction();
     }
 
+    /// <summary>
+    /// Implement this on your <see cref="QOPFeature"/> to run code during <b>Quality Of Plus's own</b>
+    /// loading sequence at the <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Start"/> stage.<br/>
+    /// This fires when QOP itself is loading, not your mod's own loading events —
+    /// QOP calls <see cref="APIStartAction"/> automatically once your feature is registered,
+    /// you don't call it yourself.
+    /// </summary>
     public interface IOnAPIStart
     {
         /// <summary>
-        /// Action to execute in <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Start"/><br>
-        /// Everything must be done in one yield keyword, otherwise game will softlock on loading screen<br>
-        /// QOP will execute action itself, no need to call it manually
+        /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Start"/> stage.<br/>
+        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// QOP invokes this for you — do not call it manually.
         /// </summary>
-        IEnumerator Action();
+        IEnumerator APIStartAction();
     }
 
+    /// <summary>
+    /// Implement this on your <see cref="QOPFeature"/> to run code during <b>Quality Of Plus's own</b>
+    /// loading sequence at the <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Post"/> stage.<br/>
+    /// This fires when QOP itself is loading, not your mod's own loading events —
+    /// QOP calls <see cref="APIPostAction"/> automatically once your feature is registered,
+    /// you don't call it yourself.
+    /// </summary>
     public interface IOnAPIPost
     {
         /// <summary>
-        /// Action to execute in <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Post"/><br>
-        /// Everything must be done in one yield keyword, otherwise game will softlock on loading screen<br>
-        /// QOP will execute action itself, no need to call it manually
+        /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Post"/> stage.<br/>
+        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// QOP invokes this for you — do not call it manually.
         /// </summary>
-        IEnumerator Action();
+        IEnumerator APIPostAction();
     }
+
+    /// <summary>
+    /// Implement this on your <see cref="QOPFeature"/> to run code during <b>Quality Of Plus's own</b>
+    /// loading sequence at the <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Final"/> stage.<br/>
+    /// This fires when QOP itself is loading, not your mod's own loading events —
+    /// QOP calls <see cref="APIFinalAction"/> automatically once your feature is registered,
+    /// you don't call it yourself.
+    /// </summary>
     public interface IOnAPIFinal
     {
         /// <summary>
-        /// Action to execute in <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Final"/><br>
-        /// Everything must be done in one yield keyword, otherwise game will softlock on loading screen<br>
-        /// QOP will execute action itself, no need to call it manually
+        /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Final"/> stage.<br/>
+        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// QOP invokes this for you — do not call it manually.
         /// </summary>
-        IEnumerator Action();
+        IEnumerator APIFinalAction();
     }
 }
