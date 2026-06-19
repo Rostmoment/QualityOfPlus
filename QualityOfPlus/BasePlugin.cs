@@ -32,7 +32,6 @@ namespace QualityOfPlus
         public static AssetManager Asset { get; private set; }
         public static Harmony Harmony { get; private set; }
         public static BasePlugin Instance { get; private set; }
-        private static GameObject qolObject;
 
         private void Awake()
         {
@@ -49,20 +48,9 @@ namespace QualityOfPlus
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIPost(), LoadingEventOrder.Post);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIFinal(), LoadingEventOrder.Final);
 
-            qolObject = new GameObject("QualityOfPlus");
-            qolObject.AddComponent<TABSwitcherComponent>().Initialize();
-            qolObject.AddComponent<BetterMapComponent>().Initialize();
-            qolObject.AddComponent<BetterElevatorComponent>().Initialize();
-            qolObject.AddComponent<BetterPauseComponent>().Initialize();
-            qolObject.AddComponent<BetterNameMenuComponent>().Initialize();
-            qolObject.AddComponent<BetterHUDComponent>().Initialize();
-            qolObject.AddComponent<BetterPitstopComponent>().Initialize();
-            qolObject.AddComponent<BetterGameWindowComponent>().Initialize();
-            qolObject.AddComponent<BetterMenuComponent>().Initialize();
-            qolObject.AddComponent<GameplayComponent>().Initialize();
-            qolObject.AddComponent<MoreIconsComponent>().Initialize();
-            qolObject.AddComponent<TransitionManagerComponent>().Initialize();
             
+
+
             CustomOptionsCore.OnMenuInitialize += ConfigOptionsMenu.Register;
 
 
