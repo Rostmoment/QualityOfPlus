@@ -9,7 +9,7 @@ namespace QualityOfPlus.BetterPause
     {
         public override string ID => "QOP.FEATURE.PAUSE.WITHOUT.SCREEN";
 
-        private ConfigEntry<KeyboardShortcut> keyBind;
+        private ConfigEntry<KeyCode> keyBind;
         public ConfigEntry<bool> Enabled { get; private set; }
         public bool ValueIfNull => false;
 
@@ -17,7 +17,7 @@ namespace QualityOfPlus.BetterPause
 
         public override void PreInitialize(QOPCategory category)
         {
-            keyBind = category.CreateEntry("Pause Without Screen Key", new KeyboardShortcut(KeyCode.Backspace), "Key that will be used to pause without pause screen");
+            keyBind = category.CreateEntry("Pause Without Screen Key", KeyCode.Backspace, "Key that will be used to pause without pause screen");
             Enabled = category.CreateEntry("Enable Pause Without Screen", true, "If true, you will be able to pause game without pause screen");
         }
 
@@ -30,7 +30,7 @@ namespace QualityOfPlus.BetterPause
             if (CoreGameManager.Instance.IsNullOrDestroyed())
                 return;
 
-            if (!keyBind.Value.IsDown() || !this.IsEnabled())
+            if (!Input.GetKeyDown(keyBind.Value) || !this.IsEnabled())
                 return;
 
             if (CoreGameManager.Instance.disablePause || GlobalCam.Instance.TransitionActive)
