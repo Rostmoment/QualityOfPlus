@@ -22,5 +22,9 @@ namespace QualityOfPlus.BetterPause
             }
             return true;
         }
+
+        [HarmonyPatch(typeof(CoreGameManager), nameof(CoreGameManager.Pause))]
+        [HarmonyPostfix]
+        private static void FixMyStupidBug() => CoreGameManager.Instance?.GetHud(0)?.CloseTooltip();
     }
 }

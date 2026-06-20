@@ -13,6 +13,7 @@ namespace QualityOfPlus.BetterPause
         public override void PostInitialize()
         {
             AddFeature<PauseWithoutScreenFeature>();
+            AddFeature<CopySeedFeature>();
         }
 
         public override void PreInitialize()
