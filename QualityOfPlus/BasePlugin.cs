@@ -14,6 +14,7 @@ using QualityOfPlus.ConditionalPatches;
 using QualityOfPlus.Interfaces;
 using System.Collections.Generic;
 using QualityOfPlus.BetterPause;
+using QualityOfPlus.BetterGameWindow;
 
 namespace QualityOfPlus
 {
@@ -55,6 +56,7 @@ namespace QualityOfPlus
             qopObject.AddComponent<QOPEvents>();
 
             QOPManager.Instance.RegisterCategory<BetterPauseCategory>(Info, Config);
+            QOPManager.Instance.RegisterCategory<BetterGameWindowCategory>(Info, Config);
 
 
             #region adding assets for name menu because API loads them on name menu, but I need them earlier
