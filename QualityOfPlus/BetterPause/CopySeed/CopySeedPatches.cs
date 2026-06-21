@@ -8,7 +8,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace QualityOfPlus.BetterPause
+namespace QualityOfPlus.BetterPause.CopySeed
 {
     [HarmonyPatch]
     internal class CopySeedPatches

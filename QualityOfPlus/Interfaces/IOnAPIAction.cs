@@ -16,7 +16,7 @@ namespace QualityOfPlus.Interfaces
     {
         /// <summary>
         /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Pre"/> stage.<br/>
-        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// Must yield return ones, otherwise game will softlock on loading screen<br/>
         /// QOP invokes this for you — do not call it manually.
         /// </summary>
         IEnumerator APIPreAction();
@@ -33,7 +33,7 @@ namespace QualityOfPlus.Interfaces
     {
         /// <summary>
         /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Start"/> stage.<br/>
-        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// Must yield return ones, otherwise game will softlock on loading screen<br/>
         /// QOP invokes this for you — do not call it manually.
         /// </summary>
         IEnumerator APIStartAction();
@@ -50,7 +50,7 @@ namespace QualityOfPlus.Interfaces
     {
         /// <summary>
         /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Post"/> stage.<br/>
-        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// Must yield return ones, otherwise game will softlock on loading screen<br/>
         /// QOP invokes this for you — do not call it manually.
         /// </summary>
         IEnumerator APIPostAction();
@@ -67,7 +67,7 @@ namespace QualityOfPlus.Interfaces
     {
         /// <summary>
         /// Called by QOP during its own <see cref="MTM101BaldAPI.Registers.LoadingEventOrder.Final"/> stage.<br/>
-        /// Must yield return exactly as many times as <see cref="IOnAPIAction.StepsCount"/> declares.<br/>
+        /// Must yield return ones, otherwise game will softlock on loading screen<br/>
         /// QOP invokes this for you — do not call it manually.
         /// </summary>
         IEnumerator APIFinalAction();

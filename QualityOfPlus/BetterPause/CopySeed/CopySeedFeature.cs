@@ -8,15 +8,16 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace QualityOfPlus.BetterPause
+namespace QualityOfPlus.BetterPause.CopySeed
 {
     public class CopySeedFeature : QOPFeature, IToggleableFeature, IOnAPIStart
     {
-        public SoundObject CopySound { get; private set; }
-        public override string ID => "QOP.FEATURE.COPY.SEED";
-
         public bool ValueIfNull => false;
         public ConfigEntry<bool> Enabled { get; private set; }
+
+
+        public SoundObject CopySound { get; private set; }
+        public override string ID => "QOP.FEATURE.COPY.SEED";
 
         public override void PreInitialize(QOPCategory category)
         {

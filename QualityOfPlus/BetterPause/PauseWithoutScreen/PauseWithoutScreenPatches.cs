@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace QualityOfPlus.BetterPause
+namespace QualityOfPlus.BetterPause.PauseWithoutScreen
 {
     [HarmonyPatch]
     internal static class PauseWithoutScreenPatches
