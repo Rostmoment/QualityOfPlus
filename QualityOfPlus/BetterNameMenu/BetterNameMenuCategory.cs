@@ -1,4 +1,5 @@
 ﻿using QualityOfPlus.BetterNameMenu.BackToNameMenu;
+using QualityOfPlus.BetterNameMenu.DeleteName;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,7 @@ namespace QualityOfPlus.BetterNameMenu
         public override void PreInitialize()
         {
             AddFeature<BackToNameMenuFeature>();
+            AddFeature<DeleteNameFeature>();
         }
         public override void PostInitialize()
         {

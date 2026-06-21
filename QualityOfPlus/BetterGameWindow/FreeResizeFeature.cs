@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace QualityOfPlus.BetterGameWindow
 {
-    public class FreeResizeFeature : QOPFeature, IToggleableFeature, IOnAPIPre
+    public class FreeResizeFeature : QOPFeature, IToggleableFeature, IOnAPIStart
     {
         public bool ValueIfNull => false;
         public ConfigEntry<bool> Enabled { get; private set; }
@@ -25,7 +25,7 @@ namespace QualityOfPlus.BetterGameWindow
         {
         }
 
-        public IEnumerator APIPreAction()
+        public IEnumerator APIStartAction()
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 yield break;

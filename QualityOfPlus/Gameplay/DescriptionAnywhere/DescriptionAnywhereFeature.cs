@@ -15,7 +15,7 @@ namespace QualityOfPlus.Gameplay.DescriptionAnywhere
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry("Pickup Description Anywhere", false, "If true, item description will be showed anywhere");
+            Enabled = category.CreateEntry("Pickup Description Anywhere", false, "If true, item description will be showm anywhere");
         }
 
         public override void PostInitialize(QOPCategory category)

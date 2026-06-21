@@ -63,12 +63,6 @@ namespace QualityOfPlus
             QOPManager.Instance.RegisterCategory<GameplayCategory>(Info, Config);
 
 
-            #region adding assets for name menu because API loads them on name menu, but I need them earlier
-            BasePlugin.Asset.Add<Sprite>("NameEntryDarkModeBG", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "DarkMode", "NameEntry.png"));
-            BasePlugin.Asset.Add<Sprite>("DarkModeEditor", AssetLoader.SpriteFromMod(BasePlugin.Instance, Vector2.one / 2f, 1f, "DarkMode", "Editor.png"));
-
-            BasePlugin.Asset.Add<Sprite>("CrossMarkPointed", AssetLoader.SpriteFromMod(this, Vector2.one / 2f, 1, "CrossPointed.png"));
-            #endregion
         }
 
         private IEnumerator APIStart()
