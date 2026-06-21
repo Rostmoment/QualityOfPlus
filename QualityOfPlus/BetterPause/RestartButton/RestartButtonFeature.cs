@@ -54,6 +54,13 @@ namespace QualityOfPlus.BetterPause.RestartButton
             InputManager.Instance.Rumble(1f, 2f);
         }
 
+
+        internal void OnRestartPressed()
+        {
+            BaseGameManager instance = BaseGameManager.Instance;
+            CoreGameManager.Instance.Pause(true);
+            GetAction(instance.GetType())?.Invoke(instance);
+        }
         public void AddCustomAction<T>(Action<T> action) where T : BaseGameManager
         {
             actions[typeof(T)] = (gameManager) =>
@@ -62,7 +69,7 @@ namespace QualityOfPlus.BetterPause.RestartButton
                     action(typedManager);
             };
         }
-        public Action<BaseGameManager> GetAction(Type type)
+        private Action<BaseGameManager> GetAction(Type type)
         {
             if (actions.TryGetValue(type, out var action))
                 return action;

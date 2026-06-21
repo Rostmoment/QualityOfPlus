@@ -64,12 +64,7 @@ namespace QualityOfPlus.BetterPause.RestartButton
 
             button = confirm.transform.Find("YesButton").GetComponent<StandardMenuButton>();
             button.OnPress = new UnityEngine.Events.UnityEvent();
-            button.OnPress.AddListener(() =>
-            {
-                BaseGameManager instance = BaseGameManager.Instance;
-                CoreGameManager.Instance.Pause(true);
-                feature.GetAction(instance.GetType())?.Invoke(instance);
-            });
+            button.OnPress.AddListener(feature.OnRestartPressed);
 
             confirm.transform.localPosition = Vector3.zero;
             pause.close = pause.close.AddToArray(confirm);

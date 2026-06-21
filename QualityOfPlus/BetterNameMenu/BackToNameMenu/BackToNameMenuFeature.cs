@@ -1,0 +1,30 @@
+﻿using BepInEx.Configuration;
+using QualityOfPlus.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace QualityOfPlus.BetterNameMenu.BackToNameMenu
+{
+    public class BackToNameMenuFeature : QOPFeature, IToggleableFeature
+    {
+        public bool ValueIfNull => false;
+        public ConfigEntry<bool> Enabled { get; private set; }
+
+        public override string ID => "QOP.FEATURE.BACK.TO.NAME.MENU";
+
+        public override void PostInitialize(QOPCategory category)
+        {
+            Enabled = category.CreateEntry<bool>("Back Button", true, "If true, you will be able to go back to name entry menu from main menu");
+        }
+
+        public override void PreInitialize(QOPCategory category)
+        {
+        }
+
+        internal void OnBackButtonPressed()
+        {
+
+        }
+    }
+}
