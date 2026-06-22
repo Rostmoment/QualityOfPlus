@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using QualityOfPlus.Interfaces;
 
-namespace QualityOfPlus.TABSwitch
+namespace QualityOfPlus.BetterUI.TABSwitch
 {
     [HarmonyPatch(typeof(StandardMenuButton))]
     internal static class TABSwitchPatches

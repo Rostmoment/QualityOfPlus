@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace QualityOfPlus.TABSwitch
+namespace QualityOfPlus.BetterUI.TABSwitch
 {
     public class TABSwitchFeature : QOPFeature, IToggleableFeature, IUpdatable
     {

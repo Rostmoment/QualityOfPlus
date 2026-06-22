@@ -1,23 +1,23 @@
 ﻿using BepInEx;
+using BepInEx.DiscordSocialSDK;
 using BepInEx.Logging;
 using HarmonyLib;
-using BepInEx.DiscordSocialSDK;
-using MTM101BaldAPI.AssetTools;
-using MTM101BaldAPI.Registers;
-using System.Collections;
-using UnityEngine;
 using MTM101BaldAPI;
+using MTM101BaldAPI.AssetTools;
 using MTM101BaldAPI.OptionsAPI;
-using System.IO;
-using System.Linq;
-using QualityOfPlus.ConditionalPatches;
-using QualityOfPlus.Interfaces;
-using System.Collections.Generic;
-using QualityOfPlus.BetterPause;
+using MTM101BaldAPI.Registers;
 using QualityOfPlus.BetterGameWindow;
 using QualityOfPlus.BetterNameMenu;
+using QualityOfPlus.BetterPause;
+using QualityOfPlus.BetterUI;
+using QualityOfPlus.ConditionalPatches;
 using QualityOfPlus.Gameplay;
-using QualityOfPlus.TABSwitch;
+using QualityOfPlus.Interfaces;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEngine;
 
 namespace QualityOfPlus
 {
@@ -62,7 +62,7 @@ namespace QualityOfPlus
             QOPManager.Instance.RegisterCategory<BetterGameWindowCategory>(Info, Config);
             QOPManager.Instance.RegisterCategory<BetterNameMenuCategory>(Info, Config);
             QOPManager.Instance.RegisterCategory<GameplayCategory>(Info, Config);
-            QOPManager.Instance.RegisterCategory<TABSwitchCategory>(Info, Config);
+            QOPManager.Instance.RegisterCategory<BetterUICategory>(Info, Config);
 
 
         }
