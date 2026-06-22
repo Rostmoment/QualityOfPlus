@@ -6,6 +6,7 @@ using MTM101BaldAPI;
 using MTM101BaldAPI.AssetTools;
 using MTM101BaldAPI.OptionsAPI;
 using MTM101BaldAPI.Registers;
+using QualityOfPlus.BetterElevator;
 using QualityOfPlus.BetterGameWindow;
 using QualityOfPlus.BetterNameMenu;
 using QualityOfPlus.BetterPause;
@@ -58,14 +59,17 @@ namespace QualityOfPlus
             GameObject qopObject = new GameObject("Quality Of Plus");
             qopObject.AddComponent<QOPEvents>();
 
-            QOPManager.Instance.RegisterCategory<BetterPauseCategory>(Info, Config);
-            QOPManager.Instance.RegisterCategory<BetterGameWindowCategory>(Info, Config);
-            QOPManager.Instance.RegisterCategory<BetterNameMenuCategory>(Info, Config);
-            QOPManager.Instance.RegisterCategory<GameplayCategory>(Info, Config);
-            QOPManager.Instance.RegisterCategory<BetterUICategory>(Info, Config);
-
+            RegisterCategory<BetterPauseCategory>();
+            RegisterCategory<BetterGameWindowCategory>();
+            RegisterCategory<BetterNameMenuCategory>();
+            RegisterCategory<GameplayCategory>();
+            RegisterCategory<BetterUICategory>();
+            RegisterCategory<BetterElevatorCategory>();
 
         }
+
+        private void RegisterCategory<T>() where T : QOPCategory, new() => 
+            QOPManager.Instance.RegisterCategory<T>(Info, Config);
 
         private IEnumerator APIStart()
         {
