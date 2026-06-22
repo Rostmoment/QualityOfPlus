@@ -17,6 +17,7 @@ using QualityOfPlus.BetterPause;
 using QualityOfPlus.BetterGameWindow;
 using QualityOfPlus.BetterNameMenu;
 using QualityOfPlus.Gameplay;
+using QualityOfPlus.TABSwitch;
 
 namespace QualityOfPlus
 {
@@ -61,6 +62,7 @@ namespace QualityOfPlus
             QOPManager.Instance.RegisterCategory<BetterGameWindowCategory>(Info, Config);
             QOPManager.Instance.RegisterCategory<BetterNameMenuCategory>(Info, Config);
             QOPManager.Instance.RegisterCategory<GameplayCategory>(Info, Config);
+            QOPManager.Instance.RegisterCategory<TABSwitchCategory>(Info, Config);
 
 
         }
