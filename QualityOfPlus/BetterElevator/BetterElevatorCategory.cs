@@ -1,5 +1,6 @@
 ﻿using QualityOfPlus.BetterElevator.BackButtons;
 using QualityOfPlus.BetterElevator.ExitTrigger;
+using QualityOfPlus.BetterElevator.QuickTV;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace QualityOfPlus.BetterElevator
         {
             AddFeature<ElevatorExitTriggerFeature>();
             AddFeature<BackElevatorButtonsFeature>();
+            AddFeature<QuickElevatorTVFeature>();
         }
         public override void PostInitialize()
         {
