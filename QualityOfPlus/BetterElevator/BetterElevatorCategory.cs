@@ -1,4 +1,5 @@
-﻿using QualityOfPlus.BetterElevator.ExitTrigger;
+﻿using QualityOfPlus.BetterElevator.BackButtons;
+using QualityOfPlus.BetterElevator.ExitTrigger;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,7 @@ namespace QualityOfPlus.BetterElevator
         public override void PreInitialize()
         {
             AddFeature<ElevatorExitTriggerFeature>();
+            AddFeature<BackElevatorButtonsFeature>();
         }
         public override void PostInitialize()
         {
