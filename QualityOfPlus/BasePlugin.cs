@@ -9,6 +9,7 @@ using MTM101BaldAPI.Registers;
 using QualityOfPlus.BetterElevator;
 using QualityOfPlus.BetterGameWindow;
 using QualityOfPlus.BetterHUD;
+using QualityOfPlus.BetterMenu;
 using QualityOfPlus.BetterNameMenu;
 using QualityOfPlus.BetterPause;
 using QualityOfPlus.BetterUI;
@@ -67,6 +68,7 @@ namespace QualityOfPlus
             RegisterCategory<BetterUICategory>();
             RegisterCategory<BetterElevatorCategory>();
             RegisterCategory<BetterHUDCategory>();
+            RegisterCategory<BetterMenuCategory>();
 
         }
 
