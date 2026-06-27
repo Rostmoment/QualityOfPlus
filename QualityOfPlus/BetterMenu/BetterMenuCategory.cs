@@ -1,4 +1,5 @@
 ﻿using QualityOfPlus.BetterMenu.FloorSelect;
+using QualityOfPlus.BetterMenu.UnlockedSeedInput;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,7 @@ namespace QualityOfPlus.BetterMenu
         public override void PreInitialize()
         {
             AddFeature<FloorSelectFeature>();
+            AddFeature<UnlockedSeedInputFeature>();
         }
         public override void PostInitialize()
         {
