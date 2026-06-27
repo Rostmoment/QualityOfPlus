@@ -20,7 +20,7 @@ namespace QualityOfPlus.BetterPause.PauseWithoutScreen
         public override void PreInitialize(QOPCategory category)
         {
             keyBind = category.CreateEntry<KeyCode>("Pause Without Screen Key", KeyCode.Backspace, "Key that will be used to pause without pause screen");
-            Enabled = category.CreateEntry<bool>("Enable Pause Without Screen", true, "If true, you will be able to pause game without pause screen");
+            Enabled = category.CreateEntry<bool>("Enable Pause Without Screen", true, "Allows pausing the game without opening the pause screen");
         }
 
         public override void PostInitialize(QOPCategory category)

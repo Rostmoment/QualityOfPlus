@@ -15,7 +15,7 @@ namespace QualityOfPlus.BetterNameMenu.BackToNameMenu
 
         public override void PostInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Back Button", true, "If true, you will be able to go back to name entry menu from main menu");
+            Enabled = category.CreateEntry<bool>("Back Button", true, "Adds an button to return to the name entry menu from the main menu");
         }
 
         public override void PreInitialize(QOPCategory category)

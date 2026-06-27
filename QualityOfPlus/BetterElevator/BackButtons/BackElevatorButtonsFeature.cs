@@ -15,7 +15,7 @@ namespace QualityOfPlus.BetterElevator.BackButtons
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Old Buttons", false, "If true, the elevator will use the old buttons as before 0.14");
+            Enabled = category.CreateEntry<bool>("Old Buttons", false, "Use old elevator buttons, just like before version 0.14");
         }
         public override void PostInitialize(QOPCategory category)
         {

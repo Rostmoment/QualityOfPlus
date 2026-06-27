@@ -69,7 +69,7 @@ namespace QualityOfPlus
             RegisterCategory<BetterElevatorCategory>();
             RegisterCategory<BetterHUDCategory>();
             RegisterCategory<BetterMenuCategory>();
-
+            
         }
 
         private void RegisterCategory<T>() where T : QOPCategory, new() => 

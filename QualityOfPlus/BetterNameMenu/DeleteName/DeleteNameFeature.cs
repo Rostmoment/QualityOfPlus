@@ -40,7 +40,7 @@ namespace QualityOfPlus.BetterNameMenu.DeleteName
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Quick Delete Button", true, "If true, you will be able to delete saved names from name entry menu");
+            Enabled = category.CreateEntry<bool>("Quick Delete Button", true, "Adds buttons to delete saved names in the name menu");
         }
 
         public override void PostInitialize(QOPCategory category)

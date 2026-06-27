@@ -12,9 +12,7 @@ namespace QualityOfPlus.BetterHUD
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>(
-                "Extended Counter Text", false,
-                "If true, notebooks counter will include the word 'Notebooks' and elevators counter will include 'Elevators'");
+            Enabled = category.CreateEntry<bool>("Extended Counter Text", false, "Adds the label 'Notebooks' to the notebooks counter and 'Elevators' to the elevators counter");
         }
 
         public override void PostInitialize(QOPCategory category) { }

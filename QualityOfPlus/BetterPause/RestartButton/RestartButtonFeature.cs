@@ -24,7 +24,7 @@ namespace QualityOfPlus.BetterPause.RestartButton
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Enable Restart Button", true, "If true, restart button will appear in pause menu");
+            Enabled = category.CreateEntry<bool>("Enable Restart Button", true, "Adds a restart button to the pause menu");
         }
         public override void PostInitialize(QOPCategory category)
         {

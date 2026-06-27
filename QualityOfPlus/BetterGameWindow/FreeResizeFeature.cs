@@ -19,7 +19,7 @@ namespace QualityOfPlus.BetterGameWindow
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Free Window Resize", false, "Allows you to resize the game window freely when in windowed mode");
+            Enabled = category.CreateEntry<bool>("Free Window Resize", false, "Make the game window freely resizable in windowed mode");
         }
         public override void PostInitialize(QOPCategory category)
         {
@@ -102,10 +102,7 @@ namespace QualityOfPlus.BetterGameWindow
 
         private const int GWL_STYLE = -16;
 
-        private const int WS_CAPTION = 0XC00000;
         private const int WS_MAXIMIZEBOX = 0x10000;
-        private const int WS_MINIMIZEBOX = 0x20000;
-        private const int WS_SYSMENU = 0x80000;
         private const int WS_THICKFRAME = 0x40000;
 
         private const string UNITY_WND_CLASS = "UnityWndClass";

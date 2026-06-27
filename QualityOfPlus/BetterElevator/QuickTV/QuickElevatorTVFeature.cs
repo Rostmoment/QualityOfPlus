@@ -15,7 +15,7 @@ namespace QualityOfPlus.BetterElevator.QuickTV
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Quick Elevator TV", false, $"If true, elevator result TV will always be skipped");
+            Enabled = category.CreateEntry<bool>("Quick Elevator TV", false, $"Always skip the elevator result TV");
         }
 
         public override void PostInitialize(QOPCategory category)

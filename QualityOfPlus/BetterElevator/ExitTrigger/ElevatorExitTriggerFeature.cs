@@ -17,7 +17,7 @@ namespace QualityOfPlus.BetterElevator.ExitTrigger
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Elevator Exit Trigger", false, "If true, old elevator trigger will be used for exit instead of green button in pitstop");
+            Enabled = category.CreateEntry<bool>("Elevator Exit Trigger", false, "Restore the old elevator exit trigger instead of the green pit stop button");
         }
         public override void PostInitialize(QOPCategory category)
         {

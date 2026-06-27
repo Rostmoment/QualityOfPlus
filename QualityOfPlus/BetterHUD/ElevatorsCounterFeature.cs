@@ -17,9 +17,7 @@ namespace QualityOfPlus.BetterHUD
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>(
-                "Elevators Counter", true,
-                "If true, notebooks counter will be replaced with elevators counter after collecting all notebooks");
+            Enabled = category.CreateEntry<bool>("Elevators Counter", true, "Replaces the notebooks counter with the elevators counter after all notebooks are collected");
         }
 
         public override void PostInitialize(QOPCategory category) { }
