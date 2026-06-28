@@ -1,8 +1,6 @@
-﻿using BepInEx.Configuration;
-using QualityOfPlus.Interfaces;
+﻿using QualityOfPlus.Interfaces;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -10,17 +8,14 @@ using UnityEngine;
 
 namespace QualityOfPlus.BetterGameWindow
 {
-    public class FreeResizeFeature : QOPFeature, IToggleableFeature, IOnAPIStart
+    public class FreeResizeFeature : QOPToggleableFeature, IOnAPIStart
     {
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
         public override string ID => "QOP.FEATURE.FREE.WINDOW.RESIZE";
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>("Free Window Resize", false, "Make the game window freely resizable in windowed mode");
-        }
+        protected override string EnabledConfigKey => "Free Window Resize";
+        protected override string EnabledConfigDescription => "Make the game window freely resizable in windowed mode";
+        protected override bool DefaultValue => false;
+
         public override void PostInitialize(QOPCategory category)
         {
         }
@@ -30,22 +25,25 @@ namespace QualityOfPlus.BetterGameWindow
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 yield break;
 
-            yield return $"Initializing window resize coroutine";
+            yield return "Initializing window resize coroutine";
+
             int pid = Process.GetCurrentProcess().Id;
             EnumWindows((w, param) =>
             {
                 if (w == IntPtr.Zero)
                     return true;
-                if (GetWindowThreadProcessId(w, out uint lpdwProcessId) == 0)
-                    return true;
-                if (lpdwProcessId != pid)
+
+                if (GetWindowThreadProcessId(w, out uint processId) == 0)
                     return true;
 
-                StringBuilder cn = new StringBuilder(256);
-                if (GetClassName(w, cn, cn.Capacity) == 0)
+                if (processId != pid)
                     return true;
 
-                if (cn.ToString() != UNITY_WND_CLASS)
+                StringBuilder className = new StringBuilder(256);
+                if (GetClassName(w, className, className.Capacity) == 0)
+                    return true;
+
+                if (className.ToString() != UNITY_WND_CLASS)
                     return true;
 
                 WindowHandle = w;
@@ -56,8 +54,8 @@ namespace QualityOfPlus.BetterGameWindow
                 yield break;
 
             BasePlugin.Instance.StartCoroutine(HandleWindowResize());
-
         }
+
         private IEnumerator HandleWindowResize()
         {
             while (true)
@@ -66,12 +64,14 @@ namespace QualityOfPlus.BetterGameWindow
                     yield break;
 
                 yield return wait;
-                if (!this.IsEnabled())
+
+                if (!IsEnabled())
                     continue;
 
                 bool fullScreen = Screen.fullScreen;
                 int windowStyle = GetWindowLong(WindowHandle, GWL_STYLE);
                 int resizableStyle = windowStyle & (WS_THICKFRAME | WS_MAXIMIZEBOX);
+
                 if (!fullScreen && resizableStyle == 0)
                 {
                     int newStyle = windowStyle | WS_THICKFRAME | WS_MAXIMIZEBOX;
@@ -81,7 +81,6 @@ namespace QualityOfPlus.BetterGameWindow
                 yield return wait;
             }
         }
-
 
         private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
@@ -106,7 +105,8 @@ namespace QualityOfPlus.BetterGameWindow
         private const int WS_THICKFRAME = 0x40000;
 
         private const string UNITY_WND_CLASS = "UnityWndClass";
-        private WaitForSeconds wait = new WaitForSeconds(1f);
+
+        private readonly WaitForSeconds wait = new WaitForSeconds(1f);
         private IntPtr WindowHandle = IntPtr.Zero;
     }
 }

@@ -1,22 +1,14 @@
-﻿using BepInEx.Configuration;
-using QualityOfPlus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using QualityOfPlus.Interfaces;
 
 namespace QualityOfPlus.Gameplay.DescriptionAnywhere
 {
-    public class DescriptionAnywhereFeature : QOPFeature, IToggleableFeature
+    public class DescriptionAnywhereFeature : QOPToggleableFeature
     {
         public override string ID => "QOP.FEATURE.GAMEPLAY.DESC.ANYWHERE";
 
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry("Pickup Description Anywhere", false, "Shows item descriptions everywhere");
-        }
+        protected override string EnabledConfigKey => "Pickup Description Anywhere";
+        protected override string EnabledConfigDescription => "Shows item descriptions everywhere";
+        protected override bool DefaultValue => false;
 
         public override void PostInitialize(QOPCategory category)
         {

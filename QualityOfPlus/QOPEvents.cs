@@ -12,7 +12,7 @@ namespace QualityOfPlus
         private void Update()
         {
             foreach (IUpdatable updatable in updatables)
-                updatable.Update();
+                updatable.OnUpdate();
         }
     }
 }

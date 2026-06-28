@@ -1,31 +1,22 @@
-﻿using BepInEx.Configuration;
-using QualityOfPlus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using QualityOfPlus.Interfaces;
 
 namespace QualityOfPlus.BetterElevator.BackButtons
 {
-    public class BackElevatorButtonsFeature : QOPFeature, IToggleableFeature
+    public class BackElevatorButtonsFeature : QOPToggleableFeature
     {
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
         public override string ID => "QOP.FEATURE.BACK.ELEVATOR.BUTTONS";
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>("Old Buttons", false, "Use old elevator buttons, just like before version 0.14");
-        }
+        protected override string EnabledConfigKey => "Old Buttons";
+        protected override string EnabledConfigDescription => "Use old elevator buttons, just like before version 0.14";
+        protected override bool DefaultValue => false;
+
         public override void PostInitialize(QOPCategory category)
         {
-            
         }
 
         public bool ButtonsShouldAppear()
         {
-            return this.IsEnabled(); // TODO: add methods for mods to lock/force buttons
+            return IsEnabled(); // TODO: add methods for mods to lock/force buttons
         }
-
     }
 }

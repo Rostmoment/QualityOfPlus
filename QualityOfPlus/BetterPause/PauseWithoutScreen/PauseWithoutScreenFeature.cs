@@ -5,22 +5,20 @@ using UnityEngine;
 
 namespace QualityOfPlus.BetterPause.PauseWithoutScreen
 {
-    public class PauseWithoutScreenFeature : QOPFeature, IToggleableFeature, IUpdatable
+    public class PauseWithoutScreenFeature : QOPToggleableFeature, IUpdatable
     {
-        public ConfigEntry<bool> Enabled { get; private set; }
-        public bool ValueIfNull => false;
-
-
         public override string ID => "QOP.FEATURE.PAUSE.WITHOUT.SCREEN";
 
         private ConfigEntry<KeyCode> keyBind;
 
         internal bool PauseNoScreen { get; set; }
 
-        public override void PreInitialize(QOPCategory category)
+        protected override string EnabledConfigKey => "Enable Puase Without Screen";
+        protected override string EnabledConfigDescription => "Allows pausing the game without opening the pause screen";
+
+        protected override void OnPreInitialize(QOPCategory category)
         {
             keyBind = category.CreateEntry<KeyCode>("Pause Without Screen Key", KeyCode.Backspace, "Key that will be used to pause without pause screen");
-            Enabled = category.CreateEntry<bool>("Enable Pause Without Screen", true, "Allows pausing the game without opening the pause screen");
         }
 
         public override void PostInitialize(QOPCategory category)

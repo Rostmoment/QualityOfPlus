@@ -11,21 +11,17 @@ using UnityEngine;
 
 namespace QualityOfPlus.BetterPause.RestartButton
 {
-    public class RestartButtonFeature : QOPFeature, IToggleableFeature, IOnAPIStart
+    public class RestartButtonFeature : QOPToggleableFeature, IOnAPIStart
     {
         private Dictionary<Type, Action<BaseGameManager>> actions = new Dictionary<Type, Action<BaseGameManager>>();
         private WeightedSoundObject[] loseSounds;
 
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
 
         public override string ID => "QOP.FEATURE.RESTART.BUTTON";
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>("Restart Button", true, "Adds a restart button to the pause menu");
-        }
+        protected override string EnabledConfigKey => "Restart Button";
+        protected override string EnabledConfigDescription => "Adds a restart button to the pause menu";
+
         public override void PostInitialize(QOPCategory category)
         {
             AddCustomAction<TutorialGameManager>(x => CoreGameManager.Instance.Quit());

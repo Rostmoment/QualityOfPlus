@@ -6,18 +6,13 @@ using System.Text;
 
 namespace QualityOfPlus.BetterSeed.UnlockedSeedInput
 {
-    public class UnlockedSeedInputFeature : QOPFeature, IToggleableFeature
+    public class UnlockedSeedInputFeature : QOPToggleableFeature
     {
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
         public override string ID => "QOP.FEATURE.UNLOCK.SEED.INPUT";
 
+        protected override string EnabledConfigKey => "Unlocks seed input even on new save files";
+        protected override string EnabledConfigDescription => throw new NotImplementedException();
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>("Unlock Seed Input", true, "Unlocks seed input even on new save files");
-        }
         public override void PostInitialize(QOPCategory category)
         {
         }

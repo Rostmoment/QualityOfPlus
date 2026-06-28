@@ -1,54 +1,45 @@
-﻿using BepInEx.Configuration;
-using QualityOfPlus.Interfaces;
+﻿using QualityOfPlus.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace QualityOfPlus.BetterUI.TABSwitch
 {
-    public class TABSwitchFeature : QOPFeature, IToggleableFeature, IUpdatable
+    public class TABSwitchFeature : QOPToggleableFeature, IUpdatable
     {
         public override string ID => "QOP.FEATURE.TAB.SWITCH";
 
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
+        protected override string EnabledConfigKey => "TAB Switching";
+        protected override string EnabledConfigDescription =>
+            "Allows switching between buttons with keyboard\n" +
+            "TAB - next button\n" +
+            "Shift+Tab - previous button\n" +
+            "Enter - press button";
+        protected override bool DefaultValue => false;
 
-        private List<StandardMenuButton> Buttons { get; } = new List<StandardMenuButton>();
+        private readonly List<StandardMenuButton> buttons = new List<StandardMenuButton>();
         private int currentIndex = 0;
 
-        private StandardMenuButton Chosen =>
-            Buttons.Count > 0 ? Buttons.ElementAtOrDefault(currentIndex) : null;
+        private StandardMenuButton Chosen => buttons.ElementAtOrDefault(currentIndex);
 
         internal void Register(StandardMenuButton button)
         {
-            if (!Buttons.Contains(button))
-                Buttons.Add(button);
+            if (!buttons.Contains(button))
+                buttons.Add(button);
         }
 
         internal void Unregister(StandardMenuButton button)
         {
-            Buttons.Remove(button);
-            if (currentIndex >= Buttons.Count)
+            buttons.Remove(button);
+            if (currentIndex >= buttons.Count)
                 currentIndex = 0;
         }
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>(
-                "TAB Switching", false,
-                "If true, you will be able to switch between buttons with keyboard\n" +
-                "TAB - next button\n" +
-                "Shift+Tab - previous button\n" +
-                "Enter - press button");
-        }
-
-        public override void PostInitialize(QOPCategory category) { }
-
         public void OnUpdate()
         {
-            if (!this.IsEnabled()) return;
+            if (!IsEnabled()) return;
 
-            Buttons.Sort((a, b) =>
+            buttons.Sort((a, b) =>
             {
                 int y = b.transform.position.y.CompareTo(a.transform.position.y);
                 return y != 0 ? y : a.transform.position.x.CompareTo(b.transform.position.x);
@@ -70,14 +61,18 @@ namespace QualityOfPlus.BetterUI.TABSwitch
 
         private void SwitchToNext()
         {
-            if (Buttons.Count == 0) return;
-            currentIndex = (currentIndex + 1) % Buttons.Count;
+            if (buttons.Count == 0) return;
+            currentIndex = (currentIndex + 1) % buttons.Count;
         }
 
         private void SwitchToPrevious()
         {
-            if (Buttons.Count == 0) return;
-            currentIndex = (currentIndex - 1 + Buttons.Count) % Buttons.Count;
+            if (buttons.Count == 0) return;
+            currentIndex = (currentIndex - 1 + buttons.Count) % buttons.Count;
+        }
+
+        public override void PostInitialize(QOPCategory category)
+        {
         }
     }
 }

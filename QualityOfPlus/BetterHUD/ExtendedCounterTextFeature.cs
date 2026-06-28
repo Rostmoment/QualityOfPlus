@@ -1,20 +1,17 @@
-﻿using BepInEx.Configuration;
-using QualityOfPlus.Interfaces;
+﻿using QualityOfPlus.Interfaces;
 
 namespace QualityOfPlus.BetterHUD
 {
-    public class ExtendedCounterTextFeature : QOPFeature, IToggleableFeature
+    public class ExtendedCounterTextFeature : QOPToggleableFeature
     {
         public override string ID => "QOP.FEATURE.HUD.EXTENDED.COUNTER.TEXT";
 
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
+        protected override string EnabledConfigKey => "Extended Counter Text";
+        protected override string EnabledConfigDescription => "Adds the label 'Notebooks' to the notebooks counter and 'Elevators' to the elevators counter";
+        protected override bool DefaultValue => false;
 
-        public override void PreInitialize(QOPCategory category)
+        public override void PostInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Extended Counter Text", false, "Adds the label 'Notebooks' to the notebooks counter and 'Elevators' to the elevators counter");
         }
-
-        public override void PostInitialize(QOPCategory category) { }
     }
 }

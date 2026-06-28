@@ -1,22 +1,15 @@
-﻿using BepInEx.Configuration;
-using QualityOfPlus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using QualityOfPlus.Interfaces;
 
 namespace QualityOfPlus.BetterMenu.FloorSelect
 {
-    public class FloorSelectFeature : QOPFeature, IToggleableFeature
+    public class FloorSelectFeature : QOPToggleableFeature
     {
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
         public override string ID => "QOP.FEATURE.FLOOR.SELECT";
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>("Floor Select buttons", false, "Enables floor select buttons that mystman uses for debug");
-        }
+        protected override string EnabledConfigKey => "Floor Select buttons";
+        protected override string EnabledConfigDescription => "Enables floor select buttons that mystman uses for debug";
+        protected override bool DefaultValue => false;
+
         public override void PostInitialize(QOPCategory category)
         {
         }

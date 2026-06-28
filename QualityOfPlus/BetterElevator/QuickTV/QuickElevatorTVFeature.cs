@@ -6,17 +6,15 @@ using System.Text;
 
 namespace QualityOfPlus.BetterElevator.QuickTV
 {
-    public class QuickElevatorTVFeature : QOPFeature, IToggleableFeature
+    public class QuickElevatorTVFeature : QOPToggleableFeature
     {
         public bool ValueIfNull => false;
         public ConfigEntry<bool> Enabled { get; private set; }
 
         public override string ID => "QOP.FEATURE.QUICK.ELEVATOR.TV";
 
-        public override void PreInitialize(QOPCategory category)
-        {
-            Enabled = category.CreateEntry<bool>("Quick Elevator TV", false, $"Always skip the elevator result TV");
-        }
+        protected override string EnabledConfigKey => "Quick Elevator TV";
+        protected override string EnabledConfigDescription => "Always skip the elevator result TV";
 
         public override void PostInitialize(QOPCategory category)
         {
