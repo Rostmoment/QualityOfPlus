@@ -27,7 +27,7 @@ namespace QualityOfPlus.BetterPause.PauseWithoutScreen
         {
         }
 
-        public void Update()
+        public void OnUpdate()
         {
             if (CoreGameManager.Instance.IsNullOrDestroyed())
                 return;

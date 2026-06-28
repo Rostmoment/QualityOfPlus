@@ -44,7 +44,7 @@ namespace QualityOfPlus.BetterUI.TABSwitch
 
         public override void PostInitialize(QOPCategory category) { }
 
-        public void Update()
+        public void OnUpdate()
         {
             if (!this.IsEnabled()) return;
 
