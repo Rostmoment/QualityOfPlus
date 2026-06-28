@@ -17,6 +17,7 @@ using QualityOfPlus.BetterUI;
 using QualityOfPlus.ConditionalPatches;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.Interfaces;
+using QualityOfPlus.TransitionManager;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -71,6 +72,7 @@ namespace QualityOfPlus
             RegisterCategory<BetterHUDCategory>();
             RegisterCategory<BetterMenuCategory>();
             RegisterCategory<BetterSeedCategory>();
+            RegisterCategory<TransitionManagerCategory>();
 
         }
 
