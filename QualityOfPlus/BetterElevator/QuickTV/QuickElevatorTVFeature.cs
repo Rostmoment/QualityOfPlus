@@ -8,9 +8,6 @@ namespace QualityOfPlus.BetterElevator.QuickTV
 {
     public class QuickElevatorTVFeature : QOPToggleableFeature
     {
-        public bool ValueIfNull => false;
-        public ConfigEntry<bool> Enabled { get; private set; }
-
         public override string ID => "QOP.FEATURE.QUICK.ELEVATOR.TV";
 
         protected override string EnabledConfigKey => "Quick Elevator TV";
