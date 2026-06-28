@@ -21,7 +21,7 @@ namespace QualityOfPlus.BetterSeed.CopySeed
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Enable Copy Seed Function", true, "Allows copying the seed by clicking it in the pause menu or elevator menu");
+            Enabled = category.CreateEntry<bool>("Copy Seed", true, "Allows copying the seed by clicking it in the pause menu or elevator menu");
         }
         public override void PostInitialize(QOPCategory category)
         {

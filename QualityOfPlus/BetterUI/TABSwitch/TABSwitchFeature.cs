@@ -35,7 +35,7 @@ namespace QualityOfPlus.BetterUI.TABSwitch
         public override void PreInitialize(QOPCategory category)
         {
             Enabled = category.CreateEntry<bool>(
-                "Enable TAB Switching", false,
+                "TAB Switching", false,
                 "If true, you will be able to switch between buttons with keyboard\n" +
                 "TAB - next button\n" +
                 "Shift+Tab - previous button\n" +

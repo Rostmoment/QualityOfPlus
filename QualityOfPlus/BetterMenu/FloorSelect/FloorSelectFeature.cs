@@ -15,7 +15,7 @@ namespace QualityOfPlus.BetterMenu.FloorSelect
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Enable Floor Select buttons", false, "Enables floor select buttons that mystman uses for debug");
+            Enabled = category.CreateEntry<bool>("Floor Select buttons", false, "Enables floor select buttons that mystman uses for debug");
         }
         public override void PostInitialize(QOPCategory category)
         {
