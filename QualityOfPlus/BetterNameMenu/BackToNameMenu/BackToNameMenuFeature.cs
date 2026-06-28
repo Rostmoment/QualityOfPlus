@@ -12,9 +12,5 @@ namespace QualityOfPlus.BetterNameMenu.BackToNameMenu
         public override void PostInitialize(QOPCategory category)
         {
         }
-
-        internal void OnBackButtonPressed()
-        {
-        }
     }
 }

@@ -13,7 +13,7 @@ namespace QualityOfPlus.BetterPause.RestartButton
 {
     public class RestartButtonFeature : QOPToggleableFeature, IOnAPIStart
     {
-        private Dictionary<Type, Action<BaseGameManager>> actions = new Dictionary<Type, Action<BaseGameManager>>();
+        private readonly Dictionary<Type, Action<BaseGameManager>> actions = new Dictionary<Type, Action<BaseGameManager>>();
         private WeightedSoundObject[] loseSounds;
 
 
