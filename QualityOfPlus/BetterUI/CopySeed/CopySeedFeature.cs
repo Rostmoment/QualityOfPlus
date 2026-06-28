@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace QualityOfPlus.BetterPause.CopySeed
+namespace QualityOfPlus.BetterUI.CopySeed
 {
     public class CopySeedFeature : QOPFeature, IToggleableFeature, IOnAPIStart
     {
@@ -21,7 +21,7 @@ namespace QualityOfPlus.BetterPause.CopySeed
 
         public override void PreInitialize(QOPCategory category)
         {
-            Enabled = category.CreateEntry<bool>("Enable Copy Seed Function", true, "Allows copying the seed by clicking it in the pause menu");
+            Enabled = category.CreateEntry<bool>("Enable Copy Seed Function", true, "Allows copying the seed by clicking it in the pause menu or elevator menu");
         }
         public override void PostInitialize(QOPCategory category)
         {

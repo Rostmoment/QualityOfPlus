@@ -1,5 +1,4 @@
-﻿using QualityOfPlus.BetterPause.CopySeed;
-using QualityOfPlus.BetterPause.PauseWithoutScreen;
+﻿using QualityOfPlus.BetterPause.PauseWithoutScreen;
 using QualityOfPlus.BetterPause.RestartButton;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,6 @@ namespace QualityOfPlus.BetterPause
         public override void PreInitialize()
         {
             AddFeature<PauseWithoutScreenFeature>();
-            AddFeature<CopySeedFeature>();
             AddFeature<RestartButtonFeature>();
         }
     }
