@@ -8,7 +8,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace QualityOfPlus.BetterUI.CopySeed
+namespace QualityOfPlus.BetterSeed.CopySeed
 {
     [HarmonyPatch]
     internal class CopySeedPatches

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QualityOfPlus.BetterMenu.UnlockedSeedInput
+namespace QualityOfPlus.BetterSeed.UnlockedSeedInput
 {
     [HarmonyPatch(typeof(HideSeekMenu))]
     internal class UnlockedSeedInputPatches

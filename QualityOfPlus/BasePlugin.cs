@@ -12,6 +12,7 @@ using QualityOfPlus.BetterHUD;
 using QualityOfPlus.BetterMenu;
 using QualityOfPlus.BetterNameMenu;
 using QualityOfPlus.BetterPause;
+using QualityOfPlus.BetterSeed;
 using QualityOfPlus.BetterUI;
 using QualityOfPlus.ConditionalPatches;
 using QualityOfPlus.Gameplay;
@@ -69,7 +70,8 @@ namespace QualityOfPlus
             RegisterCategory<BetterElevatorCategory>();
             RegisterCategory<BetterHUDCategory>();
             RegisterCategory<BetterMenuCategory>();
-            
+            RegisterCategory<BetterSeedCategory>();
+
         }
 
         private void RegisterCategory<T>() where T : QOPCategory, new() => 

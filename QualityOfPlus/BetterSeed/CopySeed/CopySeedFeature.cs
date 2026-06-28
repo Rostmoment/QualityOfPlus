@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace QualityOfPlus.BetterUI.CopySeed
+namespace QualityOfPlus.BetterSeed.CopySeed
 {
     public class CopySeedFeature : QOPFeature, IToggleableFeature, IOnAPIStart
     {
