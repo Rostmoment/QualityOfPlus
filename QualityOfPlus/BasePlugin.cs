@@ -103,7 +103,7 @@ namespace QualityOfPlus
             if (pres.Length == 0)
             {
                 yield return 1;
-                yield return $"Calling {nameof(APIPost)}";
+                yield return $"Calling {nameof(APIPre)}";
             }
             else
             {
