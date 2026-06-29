@@ -1,4 +1,5 @@
-﻿using QualityOfPlus.BetterMap.QuickMarkers;
+﻿using QualityOfPlus.BetterMap.CustomGridColor;
+using QualityOfPlus.BetterMap.QuickMarkers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,7 @@ namespace QualityOfPlus.BetterMap
             AddFeature<AddRandomMarkerFeature>();
             AddFeature<AddMarkerFeature>();
             AddFeature<RemoveMarkerFeature>();
+            AddFeature<CustomGridColorFeature>();
         }
         public override void PostInitialize()
         {
