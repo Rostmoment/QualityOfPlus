@@ -18,7 +18,7 @@ namespace QualityOfPlus
 
         public static bool DiscordSDKInstalled => Chainloader.PluginInfos.ContainsKey(DiscordSocialSDKPlugin.GUID);
 
-        
+        public const string NO_TIMER_GUID = "rost.moment.baldiplus.notimer";
 
     }
 }

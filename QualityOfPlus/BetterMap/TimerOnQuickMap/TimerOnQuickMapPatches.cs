@@ -12,7 +12,7 @@ namespace QualityOfPlus.BetterMap.TimerOnQuickMap
 {
     // TODO: remake this code
     [HarmonyPatch(typeof(Map))]
-    [QOPConditionalPatchNoMod("rost.moment.baldiplus.notimer")]
+    [QOPConditionalPatchNoMod(Compats.NO_TIMER_GUID)]
     internal class TimerOnQuickMapPatches
     {
         private static TextMeshProUGUI text;

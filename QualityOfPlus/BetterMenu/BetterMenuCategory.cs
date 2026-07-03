@@ -1,4 +1,5 @@
-﻿using QualityOfPlus.BetterMenu.FloorSelect;
+﻿using QualityOfPlus.BetterMenu.DarkMode;
+using QualityOfPlus.BetterMenu.FloorSelect;
 using QualityOfPlus.BetterSeed.UnlockedSeedInput;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace QualityOfPlus.BetterMenu
         public override void PreInitialize()
         {
             AddFeature<FloorSelectFeature>();
+            AddFeature<DarkModeFeature>();
         }
         public override void PostInitialize()
         {
