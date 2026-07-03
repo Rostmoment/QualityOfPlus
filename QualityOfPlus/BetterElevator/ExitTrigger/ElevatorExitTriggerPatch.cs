@@ -13,8 +13,7 @@ namespace QualityOfPlus.BetterElevator.ExitTrigger
         [HarmonyPostfix]
         private static void ReplaceGreenButton(Elevator __instance)
         {
-            ElevatorExitTriggerFeature feature = QOPManager.Instance.GetFeature<ElevatorExitTriggerFeature>();
-            if (!feature.IsEnabled() || !feature.IsTriggerFor(BaseGameManager.Instance.GetType()))
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out ElevatorExitTriggerFeature feature) || !feature.IsTriggerFor(BaseGameManager.Instance.GetType()))
                 return;
 
             __instance.button.gameObject.SetActive(false);

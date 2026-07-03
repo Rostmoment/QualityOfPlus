@@ -18,6 +18,7 @@ using QualityOfPlus.BetterUI;
 using QualityOfPlus.ConditionalPatches;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.Interfaces;
+using QualityOfPlus.MoreIcons;
 using QualityOfPlus.TransitionManager;
 using System.Collections;
 using System.Collections.Generic;
@@ -75,6 +76,7 @@ namespace QualityOfPlus
             RegisterCategory<BetterSeedCategory>();
             RegisterCategory<BetterMapCategory>();
             RegisterCategory<TransitionManagerCategory>();
+            RegisterCategory<MoreIconsCategory>();
 
         }
 

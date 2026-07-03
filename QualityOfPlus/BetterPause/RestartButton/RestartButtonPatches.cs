@@ -18,8 +18,7 @@ namespace QualityOfPlus.BetterPause.RestartButton
 
         private static void AddRestart(PauseReset pause)
         {
-            RestartButtonFeature feature = QOPManager.Instance.GetFeature<RestartButtonFeature>();
-            if (pause.IsNullOrDestroyed() || !restart.IsNullOrDestroyed() || !feature.IsEnabled())
+            if (pause.IsNullOrDestroyed() || !restart.IsNullOrDestroyed() || !QOPManager.Instance.GetFeatureIfEnabled(out RestartButtonFeature feature))
                 return;
 
             Transform screen = pause.transform.Find("PauseScreen");

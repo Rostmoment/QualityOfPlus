@@ -39,8 +39,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode
 
         public static void ApplyDarkMode(OptionsMenu menu, CustomOptionsHandler handler)
         {
-            DarkModeFeature feature = QOPManager.Instance.GetFeature<DarkModeFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out DarkModeFeature feature))
                 return;
 
 

@@ -13,8 +13,7 @@ namespace QualityOfPlus.TransitionManager
         [HarmonyPrefix]
         private static void ReplaceValues(ref UiTransition type, ref float duration)
         {
-            TransitionManagerFeature feature = QOPManager.Instance.GetFeature<TransitionManagerFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled<TransitionManagerFeature>(out TransitionManagerFeature feature))
                 return;
 
             switch (feature.Transition)

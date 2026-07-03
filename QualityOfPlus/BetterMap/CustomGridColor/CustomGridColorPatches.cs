@@ -13,8 +13,7 @@ namespace QualityOfPlus.BetterMap.CustomGridColor
         [HarmonyPrefix]
         private static void ChangeColor(Map __instance)
         {
-            CustomGridColorFeature feature = QOPManager.Instance.GetFeature<CustomGridColorFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out CustomGridColorFeature feature))
                 return;
 
             __instance.gridObject.transform.GetComponentInChildren<SpriteRenderer>().color = feature.Color;

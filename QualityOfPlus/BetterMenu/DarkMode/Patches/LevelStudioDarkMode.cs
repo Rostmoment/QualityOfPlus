@@ -21,8 +21,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode.Patches
 
         private static void BlackMenu()
         {
-            DarkModeFeature feature = QOPManager.Instance.GetFeature<DarkModeFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out DarkModeFeature feature))
                 return;
 
             SceneManager.GetActiveScene().GetRootGameObjects().First(x => x.name == "EditorModeSelection").transform.Find("BG").GetComponent<Image>().sprite = feature.EditorDarkMode;

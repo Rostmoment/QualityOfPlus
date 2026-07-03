@@ -26,8 +26,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode.Patches
         [HarmonyPostfix]
         private static void ApplyDarkMode(ChallengeWin __instance)
         {
-            DarkModeFeature feature = QOPManager.Instance.GetFeature<DarkModeFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out DarkModeFeature feature))
                 return;
 
             Transform canvas = __instance.transform.Find("Canvas");

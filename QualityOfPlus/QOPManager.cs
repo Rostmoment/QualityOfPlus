@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using QualityOfPlus.Interfaces;
 using Rewired.Utils.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -47,5 +48,17 @@ namespace QualityOfPlus
         public QOPFeature GetFeature(string id) => GetAllFeatures().FirstOrDefault(x => x.ID.Equals(id, StringComparison.OrdinalIgnoreCase));
         public T GetFeature<T>(string id) where T : QOPFeature => GetAllFeatures().OfType<T>().FirstOrDefault(x => x.ID.Equals(id, StringComparison.OrdinalIgnoreCase));
         public T GetFeature<T>() where T : QOPFeature => GetAllFeatures().OfType<T>().FirstOrDefault();
+
+        public bool GetFeatureIfEnabled<T>(out T feature) where T : QOPFeature, IToggleableFeature
+        {
+            T result = GetFeature<T>();
+            if (result.IsEnabled())
+            {
+                feature = result;
+                return true;
+            }
+            feature = null;
+            return false;
+        }
     }
 }

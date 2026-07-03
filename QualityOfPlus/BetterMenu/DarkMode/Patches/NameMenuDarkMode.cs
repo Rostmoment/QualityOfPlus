@@ -26,8 +26,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode.Patches
         [HarmonyPostfix]
         private static void ApplyDarkMode(NameManager __instance)
         {
-            DarkModeFeature feature = QOPManager.Instance.GetFeature<DarkModeFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out DarkModeFeature feature))
                 return;
 
             Transform parent = __instance.transform.parent;

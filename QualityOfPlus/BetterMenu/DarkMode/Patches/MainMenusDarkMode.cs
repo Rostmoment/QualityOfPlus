@@ -32,8 +32,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode.Patches
         [HarmonyPostfix]
         private static void ApplyDarkMode(MainMenu __instance)
         {
-            DarkModeFeature feature = QOPManager.Instance.GetFeature<DarkModeFeature>();
-            if (!feature.IsEnabled())
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out DarkModeFeature feature))
                 return;
 
             __instance.transform.Find("Image").GetComponent<Image>().sprite = feature.MainMenuDarkMode;

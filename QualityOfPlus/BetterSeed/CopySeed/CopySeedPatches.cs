@@ -30,8 +30,7 @@ namespace QualityOfPlus.BetterSeed.CopySeed
 
         private static void AddAction(TMP_Text text)
         {
-            CopySeedFeature feature = QOPManager.Instance.GetFeature<CopySeedFeature>();
-            if (!feature.IsEnabled() || text.TryGetComponent<StandardMenuButton>(out _))
+            if (!QOPManager.Instance.GetFeatureIfEnabled(out CopySeedFeature feature) || text.TryGetComponent<StandardMenuButton>(out _))
                 return;
 
             copying = false;
