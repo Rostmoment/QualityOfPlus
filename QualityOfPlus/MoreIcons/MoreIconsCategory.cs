@@ -1,5 +1,6 @@
 ﻿using MTM101BaldAPI;
 using QualityOfPlus.MoreIcons.PickupIcons;
+using QualityOfPlus.MoreIcons.TapePlayerIcon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace QualityOfPlus.MoreIcons
         {
             AddFeature<YTPIconFeature>();
             AddFeature<StickerIconFeature>();
+            AddFeature<TapePlayerIconFeature>();
         }
         public override void PostInitialize()
         {
