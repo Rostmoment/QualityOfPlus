@@ -14,6 +14,7 @@ namespace QualityOfPlus.MoreIcons.TapePlayerIcon
 
         protected override string EnabledConfigKey => "Tape Player Icon";
         protected override string EnabledConfigDescription => "Add custom icon for tape player";
+        protected override bool DefaultValue => false;
 
         public override void PostInitialize(QOPCategory category)
         {

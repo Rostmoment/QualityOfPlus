@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QualityOfPlus.BetterPitstop.NoFakeLoad;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,11 +11,12 @@ namespace QualityOfPlus.BetterPitstop
 
         public override string Name => "Better Pitstop";
 
-        public override void PostInitialize()
+        public override void PreInitialize()
         {
+            AddFeature<NoFakeLoadFeature>();
         }
 
-        public override void PreInitialize()
+        public override void PostInitialize()
         {
         }
     }

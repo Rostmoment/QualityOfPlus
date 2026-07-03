@@ -13,6 +13,7 @@ using QualityOfPlus.BetterMap;
 using QualityOfPlus.BetterMenu;
 using QualityOfPlus.BetterNameMenu;
 using QualityOfPlus.BetterPause;
+using QualityOfPlus.BetterPitstop;
 using QualityOfPlus.BetterSeed;
 using QualityOfPlus.BetterUI;
 using QualityOfPlus.ConditionalPatches;
@@ -77,6 +78,7 @@ namespace QualityOfPlus
             RegisterCategory<BetterMapCategory>();
             RegisterCategory<TransitionManagerCategory>();
             RegisterCategory<MoreIconsCategory>();
+            RegisterCategory<BetterPitstopCategory>();
 
         }
 
