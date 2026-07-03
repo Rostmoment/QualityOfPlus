@@ -11,7 +11,7 @@ namespace QualityOfPlus.MoreIcons
 {
     public class MoreIconsCategory : QOPCategory
     {
-        public override string ID => "QOP.CATEGORY.MOREICONS";
+        public override string ID => "QOP.CATEGORY.MORE.ICONS";
 
         public override string Name => "More Map Icons";
 

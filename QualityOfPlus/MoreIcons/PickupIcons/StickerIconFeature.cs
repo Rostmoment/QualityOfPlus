@@ -8,7 +8,7 @@ namespace QualityOfPlus.MoreIcons.PickupIcons
 {
     public class StickerIconFeature : QOPToggleableFeature
     {
-        public override string ID => "QOP.FEATURE.STICKERICON";
+        public override string ID => "QOP.FEATURE.STICKER.ICON";
 
         protected override string EnabledConfigKey => "Sticker Icon";
         protected override string EnabledConfigDescription => "Add custom map icon for sticker pickups";

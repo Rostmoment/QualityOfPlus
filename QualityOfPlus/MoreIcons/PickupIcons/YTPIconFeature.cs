@@ -8,7 +8,7 @@ namespace QualityOfPlus.MoreIcons.PickupIcons
 {
     public class YTPIconFeature : QOPToggleableFeature
     {
-        public override string ID => "QOP.FEATURE.YTPICON";
+        public override string ID => "QOP.FEATURE.YTP.ICON";
 
         protected override string EnabledConfigKey => "YTP Icon";
         protected override string EnabledConfigDescription => "Add custom map icon for YTP pickups";

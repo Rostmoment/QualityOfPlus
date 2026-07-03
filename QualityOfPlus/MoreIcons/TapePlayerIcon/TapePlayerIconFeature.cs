@@ -10,7 +10,7 @@ namespace QualityOfPlus.MoreIcons.TapePlayerIcon
 {
     public class TapePlayerIconFeature : QOPToggleableFeature, IOnAPIStart
     {
-        public override string ID => "QOP.FEATURE.TAPEPLAYERICON";
+        public override string ID => "QOP.FEATURE.TAPE.PLAYER.ICON";
 
         protected override string EnabledConfigKey => "Tape Player Icon";
         protected override string EnabledConfigDescription => "Add custom icon for tape player";
