@@ -23,6 +23,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode
         #endregion
 
         #region base game
+        public Sprite WinningScreenDarkMode { get; private set; }
         public Sprite OptionsDarkMode { get; private set; }
         public Sprite NameEntryBackgroundDarkMode { get; private set; }
         public Sprite ExitNotHighlitghedDarkMode { get; private set; }
@@ -46,6 +47,7 @@ namespace QualityOfPlus.BetterMenu.DarkMode
             ExitHighlitghedDarkMode = AssetLoader.SpriteFromMod(BasePlugin.Instance, Vector2.one / 2f, 1, "DarkMode", "ExitHighlitghed.png");
             MainMenuDarkMode = AssetLoader.SpriteFromMod(BasePlugin.Instance, Vector2.one / 2f, 1, "DarkMode", "MainMenu.png");
             WhiteCheckBox = AssetLoader.SpriteFromMod(BasePlugin.Instance, Vector2.one / 2f, 1, "DarkMode", "WhiteCheckBox.png");
+            WinningScreenDarkMode = AssetLoader.SpriteFromMod(BasePlugin.Instance, Vector2.one / 2f, 1, "DarkMode", "ChallengeWin.png");
         }
 
         public IEnumerator APIFinalAction()

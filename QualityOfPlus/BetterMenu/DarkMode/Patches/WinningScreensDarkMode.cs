@@ -26,11 +26,12 @@ namespace QualityOfPlus.BetterMenu.DarkMode.Patches
         [HarmonyPostfix]
         private static void ApplyDarkMode(ChallengeWin __instance)
         {
-            if (!QOPManager.Instance.GetFeature<DarkModeFeature>().IsEnabled())
+            DarkModeFeature feature = QOPManager.Instance.GetFeature<DarkModeFeature>();
+            if (!feature.IsEnabled())
                 return;
 
             Transform canvas = __instance.transform.Find("Canvas");
-            canvas.Find("Image").GetComponent<Image>().sprite = BasePlugin.Asset.Get<Sprite>("ChallengeWinDarkMode");
+            canvas.Find("Image").GetComponent<Image>().sprite = feature.WinningScreenDarkMode;
             canvas.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
     }
