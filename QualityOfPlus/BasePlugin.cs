@@ -17,6 +17,7 @@ using QualityOfPlus.BetterPitstop;
 using QualityOfPlus.BetterSeed;
 using QualityOfPlus.BetterUI;
 using QualityOfPlus.ConditionalPatches;
+using QualityOfPlus.DiscordSocialSDK;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.Interfaces;
 using QualityOfPlus.MoreIcons;
@@ -42,7 +43,6 @@ namespace QualityOfPlus
     [BepInPlugin(MyPluginInfo.GUID, MyPluginInfo.NAME, MyPluginInfo.VERSION)]
     public class BasePlugin : BaseUnityPlugin
     {
-
         public new static ManualLogSource Logger { get; private set; }
         public static AssetManager Asset { get; private set; }
         public static Harmony Harmony { get; private set; }
@@ -79,6 +79,7 @@ namespace QualityOfPlus
             RegisterCategory<TransitionManagerCategory>();
             RegisterCategory<MoreIconsCategory>();
             RegisterCategory<BetterPitstopCategory>();
+            RegisterCategory<DiscordSocialSDKCategory>();
 
         }
 

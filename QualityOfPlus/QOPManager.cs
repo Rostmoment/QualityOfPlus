@@ -51,14 +51,8 @@ namespace QualityOfPlus
 
         public bool GetFeatureIfEnabled<T>(out T feature) where T : QOPFeature, IToggleableFeature
         {
-            T result = GetFeature<T>();
-            if (result.IsEnabled())
-            {
-                feature = result;
-                return true;
-            }
-            feature = null;
-            return false;
+            feature = GetFeature<T>();
+            return feature.IsEnabled();
         }
     }
 }

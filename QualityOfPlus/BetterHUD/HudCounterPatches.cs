@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using QualityOfPlus.Helpers;
 using QualityOfPlus.Interfaces;
 using System.Linq;
 using UnityEngine;
@@ -16,10 +17,6 @@ namespace QualityOfPlus.BetterHUD
             QOPManager.Instance.GetFeature<ExtendedCounterTextFeature>();
 
         // ── helpers ──────────────────────────────────────────────────────────────
-        public static int ElevatorsCount => BaseGameManager.Instance.ec.ElevatorManager.Elevators.Count;
-        public static int TotalOutOfOrderElevators => BaseGameManager.Instance.ec.ElevatorManager.TotalOutOfOrderElevators;
-        public static int OutOfElevatorsCount => BaseGameManager.Instance.ec.ElevatorManager.Elevators.Count(x => x.CurrentState == ElevatorState.OutOfOrder);
-
         private static bool AllNotebooksCollected =>
             BaseGameManager.Instance.FoundNotebooks >= BaseGameManager.Instance.Ec.notebookTotal;
 
@@ -40,9 +37,9 @@ namespace QualityOfPlus.BetterHUD
 
         private static string ElevatorsText()
         {
-            int outOfOrder = OutOfElevatorsCount;
-            int totalOutOfOrder = TotalOutOfOrderElevators + 1;
-            int active = ElevatorsCount;
+            int outOfOrder = BaseGameManager.Instance.Ec.GetOutOfElevatorsCount();
+            int totalOutOfOrder = BaseGameManager.Instance.Ec.GetTotalOutOfOrderElevators() + 1;
+            int active = BaseGameManager.Instance.Ec.GetElevatorsCount();
             string text = $"{outOfOrder}/{totalOutOfOrder} ({active})";
             if (ExtendedText.IsEnabled())
                 text += " " + LocalizationManager.Instance.GetLocalizedText("QOP_HUD_ELEVATORS");
