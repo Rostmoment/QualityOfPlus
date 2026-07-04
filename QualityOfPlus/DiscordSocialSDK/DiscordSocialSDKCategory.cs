@@ -1,4 +1,5 @@
 ﻿using BepInEx.DiscordSocialSDK.Client;
+using QualityOfPlus.DiscordSocialSDK.AutoDND;
 using QualityOfPlus.DiscordSocialSDK.RPC;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace QualityOfPlus.DiscordSocialSDK
             Client = new ClientWrapper(1487165611397222540);
 
             AddFeature<DiscordRPCFeature>();
+            AddFeature<AutoDNDFeature>();
         }
         public override void PostInitialize()
         {
