@@ -1,4 +1,5 @@
-﻿using MTM101BaldAPI.Registers;
+﻿using MTM101BaldAPI;
+using MTM101BaldAPI.Registers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
 
         public override void PostInitialize(QOPCategory category)
         {
+            AddSortingMethod(new StickersSortingMethod("Don't Sort", stickers => stickers));
             AddSortingMethod(new StickersSortingMethod("Quantity", stickers => stickers.OrderBy(x => x.Value).ToArray()));
             AddSortingMethod(new StickersSortingMethod("Quantity Descending", stickers => stickers.OrderByDescending(x => x.Value).ToArray()));
         }
