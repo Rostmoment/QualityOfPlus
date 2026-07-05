@@ -25,7 +25,7 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
 
         private TextMeshProUGUI sortingText;
         private int sortingIndex = 0;
-        private StickersSortingMethod CurrentSorting => QOPManager.Instance.GetFeature<BetterStickersMenuFeature>().sortingMethods[0];
+        private StickersSortingMethod CurrentSorting => QOPManager.Instance.GetFeature<BetterStickersMenuFeature>().sortingMethods[sortingIndex];
 
         private StickerScreenController screen;
 
@@ -41,8 +41,9 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
             sortingIndex = -1;
 
             SetupMask();
-            SetupScroller();// TODO: add sorting options
-            //ChangeSortingIndex();
+            SetupScroller();
+            SetupSorting();
+            ChangeSortingIndex();
         }
 
         private void SetupMask()
@@ -81,34 +82,36 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
             button.transform.localPosition = new Vector3(0, SCROLLER_BUTTON_MAX, 0);
 
             scrollerButton = button.ConvertToButton<StandardMenuButton>();
-        }/*
+        }
         private void SetupSorting()
         {
             GameObject mainObject = new GameObject("Sorting");
             mainObject.transform.SetParent(screen.transform);
             mainObject.transform.SetSiblingIndex(3);
-            mainObject.transform.localPosition =
+            mainObject.transform.localPosition = new Vector3(-125, 135, 0);
 
             GameObject bg = new GameObject("BG");
             bg.transform.SetParent(mainObject.transform);
             Image image = bg.AddComponent<Image>();
             image.color = Color.black;
+            image.transform.localPosition = Vector3.zero;
+            image.rectTransform.sizeDelta = new Vector2(175, 30);
             bg.AddComponent<Outline>().effectColor = Color.white;
 
             sortingText = UIHelpers.CreateText<TextMeshProUGUI>(BaldiFonts.ComicSans12, "", mainObject.transform, Vector3.zero);
-            sortingText.transform.localPosition = new Vector3(30, -18, 0);
+            sortingText.transform.localPosition = new Vector3(15, -18, 0);
             sortingText.raycastTarget = true;
             StandardMenuButton button = sortingText.gameObject.ConvertToButton<StandardMenuButton>();
             button.OnPress.AddListener(ChangeSortingIndex);
             button.underlineOnHigh = true;
-        }*/
+        }
         private void ChangeSortingIndex()
         {
             BetterStickersMenuFeature feature = QOPManager.Instance.GetFeature<BetterStickersMenuFeature>();
+
             sortingIndex++;
-            if (sortingIndex > 0)
-                sortingIndex = feature.sortingMethods.Count - 1;
-            if (feature.sortingMethods.Count >= sortingIndex)
+
+            if (sortingIndex >= feature.sortingMethods.Count)
                 sortingIndex = 0;
 
             sortingText.text = $"Sort by: {CurrentSorting.Name}";
