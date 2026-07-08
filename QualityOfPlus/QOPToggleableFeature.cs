@@ -3,13 +3,16 @@ using QualityOfPlus.Interfaces;
 
 namespace QualityOfPlus
 {
-    public abstract class QOPToggleableFeature : QOPFeature, IToggleableFeature
+    public abstract class QOPToggleableFeature : QOPFeature, IToggleableFeature, IOptionsToggleableFeature
     {
         private ConfigEntry<bool> enabled;
 
         protected abstract string EnabledConfigKey { get; }
         protected abstract string EnabledConfigDescription { get; }
         protected virtual bool DefaultValue => true;
+
+        public string OptionToggleDescription => EnabledConfigKey;
+        public string OptionToggleText => $"{EnabledConfigDescription}\nDefault: {DefaultValue}";
 
         protected virtual void OnPreInitialize(QOPCategory category) { }
 
