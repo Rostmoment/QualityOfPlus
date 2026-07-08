@@ -15,5 +15,10 @@ namespace QualityOfPlus.BetterMap.TimerOnQuickMap
         {
 
         }
+
+        public override bool IsEnabled()
+        {
+            return base.IsEnabled() && !Compats.NoTimerInstalled;
+        }
     }
 }
