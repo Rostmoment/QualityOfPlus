@@ -20,7 +20,7 @@ namespace QualityOfPlus
         }
 
 
-        public bool IsEnabled() => enabled?.Value ?? DefaultValue;
+        public virtual bool IsEnabled() => enabled?.Value ?? DefaultValue;
 
         public bool TrySetActive(bool value)
         {

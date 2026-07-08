@@ -18,14 +18,24 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
 
         public override void PostInitialize(QOPCategory category)
         {
-            AddSortingMethod(new StickersSortingMethod("Don't Sort", stickers => stickers));
-            AddSortingMethod(new StickersSortingMethod("Quantity", stickers => stickers.OrderBy(x => x.Value).ToArray()));
-            AddSortingMethod(new StickersSortingMethod("Quantity Descending", stickers => stickers.OrderByDescending(x => x.Value).ToArray()));
+            AddSortingMethod("Last Gotten", stickers => stickers);
+            AddSortingMethod("First Gotten", stickers => stickers.Reverse().ToArray());
+            AddSortingMethod("Quantity", stickers => stickers.OrderBy(x => x.Value).ToArray());
+            AddSortingMethod("Quantity Descending", stickers => stickers.OrderByDescending(x => x.Value).ToArray());
         }
 
+        internal void AddSortingMethod(string name, Func<ExtendedInventorySticker[], ExtendedInventorySticker[]> sorter)
+        {
+            AddSortingMethod(new StickersSortingMethod(name, sorter));
+        }
         internal void AddSortingMethod(StickersSortingMethod sortingMethod)
         {
             sortingMethods.Add(sortingMethod);
+        }
+
+        public override bool IsEnabled()
+        {
+            return base.IsEnabled() && !Compats.BetterStickerUIInstalled;
         }
     }
 }
