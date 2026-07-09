@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QualityOfPlus.Extensions
+namespace QualityOfPlus.Helpers.Extensions
 {
     static class UnityExtensions
     {

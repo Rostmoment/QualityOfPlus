@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using MTM101BaldAPI.UI;
-using QualityOfPlus.Extensions;
 using QualityOfPlus.Interfaces;
 using System;
 using System.Collections.Generic;

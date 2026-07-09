@@ -1,5 +1,4 @@
 ﻿using BepInEx.Configuration;
-using QualityOfPlus.Extensions;
 using QualityOfPlus.Interfaces;
 using UnityEngine;
 

@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using QualityOfPlus.Extensions;
 using QualityOfPlus.Interfaces;
 using System;
 using System.Collections;
