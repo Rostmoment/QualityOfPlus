@@ -102,7 +102,7 @@ namespace QualityOfPlus.ConfigsInOptions
 
         private void Update()
         {
-            float y = CursorController.Instance.movementThisFrame.y;
+            float y = Input.mouseScrollDelta.y;
             CurrentActiveCategory.ScrollFor(y);
         }
     }

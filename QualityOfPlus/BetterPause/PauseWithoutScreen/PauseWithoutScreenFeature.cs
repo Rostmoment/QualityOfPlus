@@ -13,7 +13,7 @@ namespace QualityOfPlus.BetterPause.PauseWithoutScreen
 
         internal bool PauseNoScreen { get; set; }
 
-        protected override string EnabledConfigKey => "Enable Pause Without Screen";
+        protected override string EnabledConfigKey => "Pause Without Screen";
         protected override string EnabledConfigDescription => "Allows pausing the game without opening the pause screen";
 
         protected override void OnPreInitialize(QOPCategory category)

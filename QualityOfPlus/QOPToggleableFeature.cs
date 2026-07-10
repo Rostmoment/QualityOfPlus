@@ -11,8 +11,8 @@ namespace QualityOfPlus
         protected abstract string EnabledConfigDescription { get; }
         protected virtual bool DefaultValue => true;
 
-        public string OptionToggleDescription => EnabledConfigKey;
-        public string OptionToggleText => $"{EnabledConfigDescription}";
+        public string OptionToggleDescription => EnabledConfigDescription;
+        public string OptionToggleText => EnabledConfigKey;
 
         protected virtual void OnPreInitialize(QOPCategory category) { }
 
