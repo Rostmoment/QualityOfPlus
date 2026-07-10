@@ -13,6 +13,7 @@ namespace QualityOfPlus.BetterGameWindow
         public override void PreInitialize()
         {
             AddFeature<FreeResizeFeature>();
+            AddFeature<PauseOnFocusLoseFeature>();
         }
         public override void PostInitialize()
         {

@@ -132,9 +132,12 @@ namespace QualityOfPlus.ConfigsInOptions
         {
             offset = 0f;
 
-            Vector3 resetPos = scrollButton.transform.localPosition;
-            resetPos.y = SCROLL_MAX;
-            scrollButton.transform.localPosition = resetPos;
+            if (scrollButton != null)
+            {
+                Vector3 resetPos = scrollButton.transform.localPosition;
+                resetPos.y = SCROLL_MAX;
+                scrollButton.transform.localPosition = resetPos;
+            }
 
             CurrentActiveCategory.ApplyScroll(0f);
         }
