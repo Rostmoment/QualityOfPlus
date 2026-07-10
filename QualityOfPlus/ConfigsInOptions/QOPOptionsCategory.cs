@@ -12,12 +12,13 @@ namespace QualityOfPlus.ConfigsInOptions
 {
     class QOPOptionsCategory
     {
-        private const int UNITS_PER_CONFIG = 60;
-        private const float MOUSE_SCROLL_MULTIPLIER = -5; // TODO: add scroll button as better stickers
+        private const int UNITS_PER_OBJECT = 60;
         private const int MAX_WORDS_PER_LINE = 12;
         private const int MIN_WORLDS_PER_LINE = 3;
+
         public string Name => qopCategory.Name;
         public int ObjectCount => objects.Count;
+        public int TotalUnits => UNITS_PER_OBJECT * ObjectCount;
 
         private GameObject parent;
         private Image mask;
@@ -26,6 +27,7 @@ namespace QualityOfPlus.ConfigsInOptions
 
         private int y = 60;
         private List<GameObject> objects = new List<GameObject>();
+        private List<float> baseYPositions = new List<float>();
 
         private Dictionary<IOptionsToggleableFeature, MenuToggle> toggleables = new Dictionary<IOptionsToggleableFeature, MenuToggle>();
 
@@ -52,7 +54,9 @@ namespace QualityOfPlus.ConfigsInOptions
             optionsCategory.AddTooltip(toggle, WrapDescription(toggleable.OptionToggleDescription));
 
             toggle.transform.SetParent(mask.transform, false);
-            y -= UNITS_PER_CONFIG;
+
+            baseYPositions.Add(y);
+            y -= UNITS_PER_OBJECT;
 
             toggleables.Add(toggleable, toggle);
             objects.Add(toggle.gameObject);
@@ -65,20 +69,16 @@ namespace QualityOfPlus.ConfigsInOptions
         }
 
         public void SetActive(bool active) => parent.SetActive(active);
-
-        public void ScrollFor(float y)
+        public void ApplyScroll(float offset)
         {
-            float scroll = y * MOUSE_SCROLL_MULTIPLIER;
-
-            foreach (GameObject gameObject in objects)
+            for (int i = 0; i < objects.Count; i++)
             {
-                Vector3 vector = gameObject.transform.localPosition;
-                vector.y += scroll;
-                gameObject.transform.localPosition = vector;
+                Vector3 vector = objects[i].transform.localPosition;
+                vector.y = baseYPositions[i] + offset;
+                objects[i].transform.localPosition = vector;
             }
         }
 
-        private int WordsInDescription(string description) => Regex.Matches(description, @"\b\w+\b").Count;
 
         private string WrapDescription(string description)
         {

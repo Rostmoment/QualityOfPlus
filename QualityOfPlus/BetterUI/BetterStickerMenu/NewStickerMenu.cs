@@ -74,7 +74,7 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
             button.transform.SetParent(scroller.transform);
             
             Image buttonImage = button.AddComponent<Image>();
-            buttonImage.color = new Color(0.4f, 0.4f, 0.4f);
+            buttonImage.color = new Color(0.277f, 0.757f, 0.101f);
             buttonImage.rectTransform.sizeDelta = new Vector2(16, 50);
             buttonImage.raycastTarget = true;
 

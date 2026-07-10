@@ -16,6 +16,13 @@ namespace QualityOfPlus.ConfigsInOptions
         private const int MASK_SIZE_Y = 205;
         private const int CATEGORY_Y = 75;
 
+        private StandardMenuButton scrollButton;
+        private const float SCROLL_SIZE_X = 25;
+        private const float SCROLL_SIZE_Y = 200;
+        private const float SCROLL_MAX = 73;
+        private const float SCROLL_MIN = -73;
+
+        private float offset;
 
         private List<QOPOptionsCategory> categories = new List<QOPOptionsCategory>();
         private TextMeshProUGUI categoryTitle;
@@ -55,7 +62,27 @@ namespace QualityOfPlus.ConfigsInOptions
                     category.OnApplyButtonPressed();
             });
 
-            CreateText("UseWheel", LocalizationManager.Instance.GetLocalizedText("UseMMB"), new Vector3(-20, -160), BaldiFonts.ComicSans24, TextAlignmentOptions.Left, new Vector2(300, 20), Color.red);
+            AddScroller();
+        }
+
+        private void AddScroller()
+        {
+            Image scrollBg = CreateImage(null, "ScrollBG", new Vector3(165, -45, 0), new Vector2(SCROLL_SIZE_X, SCROLL_SIZE_Y));
+            scrollBg.color = Color.black;
+            scrollBg.gameObject.AddComponent<Outline>().effectColor = Color.white;
+
+            GameObject scrollButtonObject = new GameObject("Button");
+            scrollButtonObject.transform.SetParent(scrollBg.transform);
+            scrollButtonObject.transform.localPosition = Vector3.zero;
+            scrollButtonObject.transform.localScale = Vector3.one;
+
+            Image scrollButtonImage = scrollButtonObject.AddComponent<Image>();
+            scrollButtonImage.rectTransform.sizeDelta = new Vector2(SCROLL_SIZE_X - 4, 45);
+            scrollButtonImage.color = new Color(0.277f, 0.757f, 0.101f);
+            scrollButtonObject.AddComponent<Outline>().effectColor = Color.white;
+            scrollButtonImage.raycastTarget = true;
+
+            scrollButton = scrollButtonObject.ConvertToButton<StandardMenuButton>();
         }
 
         private QOPOptionsCategory CreateCategory(QOPCategory qop)
@@ -97,13 +124,54 @@ namespace QualityOfPlus.ConfigsInOptions
 
             CurrentActiveCategory.SetActive(true);
             categoryTitle.text = categories[currentCategory].Name;
+
+            ResetScroll();
         }
 
+        private void ResetScroll()
+        {
+            offset = 0f;
+
+            Vector3 resetPos = scrollButton.transform.localPosition;
+            resetPos.y = SCROLL_MAX;
+            scrollButton.transform.localPosition = resetPos;
+
+            CurrentActiveCategory.ApplyScroll(0f);
+        }
+
+        private float GetMaxScrollOffset()
+        {
+            return Mathf.Max(0f, CurrentActiveCategory.TotalUnits - MASK_SIZE_Y);
+        }
 
         private void Update()
         {
-            float y = Input.mouseScrollDelta.y;
-            CurrentActiveCategory.ScrollFor(y);
+            float maxOffset = GetMaxScrollOffset();
+            float trackRange = SCROLL_MAX - SCROLL_MIN;
+
+            if (maxOffset <= 0f)
+            {
+                Vector3 resetPos = scrollButton.transform.localPosition;
+                resetPos.y = SCROLL_MAX;
+                scrollButton.transform.localPosition = resetPos;
+
+                offset = 0f;
+                CurrentActiveCategory.ApplyScroll(0f);
+                return;
+            }
+
+            if (scrollButton.held)
+            {
+                Vector3 local = scrollButton.transform.localPosition;
+                local.y += CursorController.Instance.movementThisFrame.y;
+                local.y = Mathf.Clamp(local.y, SCROLL_MIN, SCROLL_MAX);
+                scrollButton.transform.localPosition = local;
+            }
+
+            float t = (SCROLL_MAX - scrollButton.transform.localPosition.y) / trackRange;
+            offset = t * maxOffset;
+
+            CurrentActiveCategory.ApplyScroll(offset);
         }
     }
 }
