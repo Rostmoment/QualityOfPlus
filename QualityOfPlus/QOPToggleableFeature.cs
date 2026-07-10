@@ -3,7 +3,7 @@ using QualityOfPlus.Interfaces;
 
 namespace QualityOfPlus
 {
-    public abstract class QOPToggleableFeature : QOPFeature, IToggleableFeature, IOptionsToggleableFeature
+    public abstract class QOPToggleableFeature : QOPFeature, IOptionsToggleableFeature
     {
         private ConfigEntry<bool> enabled;
 
@@ -12,7 +12,7 @@ namespace QualityOfPlus
         protected virtual bool DefaultValue => true;
 
         public string OptionToggleDescription => EnabledConfigKey;
-        public string OptionToggleText => $"{EnabledConfigDescription}\nDefault: {DefaultValue}";
+        public string OptionToggleText => $"{EnabledConfigDescription}";
 
         protected virtual void OnPreInitialize(QOPCategory category) { }
 

@@ -5,7 +5,7 @@ using MTM101BaldAPI;
 using PicnicPanic;
 using PlusLevelStudio;
 using QualityOfPlus.ConditionalPatches;
-using QualityOfPlus.Helpers;
+using QualityOfPlus.Helpers.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;

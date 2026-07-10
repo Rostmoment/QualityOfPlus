@@ -1,6 +1,7 @@
 ﻿using BepInEx.Bootstrap;
 using HarmonyLib;
 using QualityOfPlus.ConditionalPatches;
+using QualityOfPlus.Helpers.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;

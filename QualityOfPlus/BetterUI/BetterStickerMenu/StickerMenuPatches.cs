@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using MTM101BaldAPI;
+using QualityOfPlus.Helpers.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -18,7 +18,7 @@ namespace QualityOfPlus
         public abstract string ID { get; }
 
         /// <summary>
-        /// Name of category in config file
+        /// Human readable name for category, used in cofings and options menu
         /// </summary>
         public abstract string Name { get; }
 

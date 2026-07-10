@@ -17,6 +17,7 @@ using QualityOfPlus.BetterPitstop;
 using QualityOfPlus.BetterSeed;
 using QualityOfPlus.BetterUI;
 using QualityOfPlus.ConditionalPatches;
+using QualityOfPlus.ConfigsInOptions;
 using QualityOfPlus.DiscordSocialSDK;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.Interfaces;
@@ -62,6 +63,8 @@ namespace QualityOfPlus
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIPost(), LoadingEventOrder.Post);
             LoadingEvents.RegisterOnAssetsLoaded(Info, APIFinal(), LoadingEventOrder.Final);
 
+            LoadingEvents.RegisterOnAssetsLoaded(Info, LoadAssets(), LoadingEventOrder.Start);
+
 
             GameObject qopObject = new GameObject("Quality Of Plus");
             qopObject.AddComponent<QOPEvents>();
@@ -81,10 +84,26 @@ namespace QualityOfPlus
             RegisterCategory<BetterPitstopCategory>();
             RegisterCategory<DiscordSocialSDKCategory>();
 
+
+            CustomOptionsCore.OnMenuInitialize += QOPOptionsMenu.Register;
+
         }
 
         private void RegisterCategory<T>() where T : QOPCategory, new() => 
             QOPManager.Instance.RegisterCategory<T>(Info, Config);
+
+        private IEnumerator LoadAssets()
+        {
+            yield return 1;
+            yield return "Creating QOP internal assets...";
+
+            Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
+
+            BasePlugin.Asset.Add<Sprite>("ArrowLeftHigh", sprites.First(x => x.name == "MenuArrowSheet_0"));
+            BasePlugin.Asset.Add<Sprite>("ArrowLeftUnhigh", sprites.First(x => x.name == "MenuArrowSheet_2"));
+            BasePlugin.Asset.Add<Sprite>("ArrowRightHigh", sprites.First(x => x.name == "MenuArrowSheet_1"));
+            BasePlugin.Asset.Add<Sprite>("ArrowRightUnhigh", sprites.First(x => x.name == "MenuArrowSheet_3"));
+        }
 
         private IEnumerator APIStart()
         {

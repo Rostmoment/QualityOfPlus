@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using QualityOfPlus.Helpers;
+using QualityOfPlus.Helpers.Extensions;
 using QualityOfPlus.Interfaces;
 using System.Linq;
 using UnityEngine;
