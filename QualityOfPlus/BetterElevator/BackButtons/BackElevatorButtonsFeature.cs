@@ -1,4 +1,5 @@
 ﻿using QualityOfPlus.Interfaces;
+using System;
 
 namespace QualityOfPlus.BetterElevator.BackButtons
 {
@@ -14,9 +15,45 @@ namespace QualityOfPlus.BetterElevator.BackButtons
         {
         }
 
+
+        private int forceOnCount = 0;
+        private int forceOffCount = 0;
+
+        /// <summary>
+        /// Adds a force override. Pass <c>true</c> to force buttons on, <c>false</c> to force them off.<br/>
+        /// Each call must be paired with a matching <see cref="RemoveForce"/> call to release the override.
+        /// </summary>
+        public void AddForce(bool value)
+        {
+            if (value) 
+                forceOnCount++;
+            else 
+                forceOffCount++;
+        }
+
+        /// <summary>Releases a previously added force override.</summary>
+        public void RemoveForce(bool value)
+        {
+            if (value) 
+                forceOnCount = Math.Max(0, forceOnCount - 1);
+            else 
+                forceOffCount = Math.Max(0, forceOffCount - 1);
+        }
+
+        /// <summary>
+        /// Returns whether the old elevator buttons should be shown.<br/>
+        /// Priority: force-on > force-off > config toggle.<br/>
+        /// If any mod forced on — buttons shown. Else if any forced off — buttons hidden. Else config decides.
+        /// </summary>
         public bool ButtonsShouldAppear()
         {
-            return IsEnabled(); // TODO: add methods for mods to lock/force buttons
+            if (forceOnCount > 0) 
+                return true;
+
+            if (forceOffCount > 0) 
+                return false;
+
+            return IsEnabled();
         }
     }
 }
