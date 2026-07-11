@@ -12,6 +12,7 @@ namespace QualityOfPlus.BetterSeed.UnlockedSeedInput
 
         protected override string EnabledConfigKey => "Unlocked Seed Input";
         protected override string EnabledConfigDescription => "Unlocks seed input even on new save files";
+        protected override bool DefaultValue => false;
 
         public override void PostInitialize(QOPCategory category)
         {
