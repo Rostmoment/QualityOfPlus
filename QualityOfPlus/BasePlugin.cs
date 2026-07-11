@@ -24,7 +24,6 @@ using QualityOfPlus.Interfaces;
 using QualityOfPlus.MoreIcons;
 using QualityOfPlus.TransitionManager;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -35,7 +34,7 @@ namespace QualityOfPlus
     {
         public const string NAME = "Quality Of Plus";
         public const string GUID = "rost.moment.baldiplus.qop";
-        public const string VERSION = "1.9.2.2";
+        public const string VERSION = "2.0";
     }
 
     [BepInDependency(MTM101BaldiDevAPI.ModGUID, BepInDependency.DependencyFlags.HardDependency)]
