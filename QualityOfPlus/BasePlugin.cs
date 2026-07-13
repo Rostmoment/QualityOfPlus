@@ -34,7 +34,7 @@ namespace QualityOfPlus
     {
         public const string NAME = "Quality Of Plus";
         public const string GUID = "rost.moment.baldiplus.qop";
-        public const string VERSION = "2.0";
+        public const string VERSION = "2.0.1";
     }
 
     [BepInDependency(MTM101BaldiDevAPI.ModGUID, BepInDependency.DependencyFlags.HardDependency)]
@@ -81,7 +81,9 @@ namespace QualityOfPlus
             RegisterCategory<TransitionManagerCategory>();
             RegisterCategory<MoreIconsCategory>();
             RegisterCategory<BetterPitstopCategory>();
-            RegisterCategory<DiscordSocialSDKCategory>();
+
+            if (Compats.DiscordSDKInstalled)
+                RegisterCategory<DiscordSocialSDKCategory>();
 
 
             CustomOptionsCore.OnMenuInitialize += QOPOptionsMenu.Register;
