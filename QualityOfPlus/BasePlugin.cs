@@ -22,6 +22,7 @@ using QualityOfPlus.DiscordSocialSDK;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.Interfaces;
 using QualityOfPlus.MoreIcons;
+using QualityOfPlus.PhotoMode;
 using QualityOfPlus.TransitionManager;
 using System.Collections;
 using System.IO;
@@ -81,6 +82,7 @@ namespace QualityOfPlus
             RegisterCategory<TransitionManagerCategory>();
             RegisterCategory<MoreIconsCategory>();
             RegisterCategory<BetterPitstopCategory>();
+            RegisterCategory<PhotoModeCategory>();
 
             if (Compats.DiscordSDKInstalled)
                 RegisterCategory<DiscordSocialSDKCategory>();
