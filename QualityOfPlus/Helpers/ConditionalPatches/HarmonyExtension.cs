@@ -28,7 +28,11 @@ namespace QualityOfPlus.ConditionalPatches
                 foreach (CustomAttributeData cad in type.CustomAttributes)
                 {
                     if (Is<QOPConditionalPatch>(cad))
+                    {
                         conditionsClass.Add(AttributeFrom<QOPConditionalPatch>(cad));
+                        if (!AllConditions(conditionsClass))
+                            goto continueTypes;
+                    }
 
                     if (Is<HarmonyPatch>(cad))
                     {
@@ -38,13 +42,15 @@ namespace QualityOfPlus.ConditionalPatches
                     }
                 }
 
+                if (!shouldPatchClass)
+                    continue;
+
                 if (conditionsClass.Count > 0)
-                    shouldPatchClass = conditionsClass.All(x => x.ShouldPatch());
+                    shouldPatchClass = AllConditions(conditionsClass);
 
                 if (!shouldPatchClass)
                     continue;
 
-                BasePlugin.Logger.LogInfo(type.FullName);
 
                 foreach (MethodInfo method in type.GetMethods(flags))
                 {
@@ -67,7 +73,11 @@ namespace QualityOfPlus.ConditionalPatches
                     {
 
                         if (Is<QOPConditionalPatch>(cad))
+                        {
                             conditionsMethod.Add(AttributeFrom<QOPConditionalPatch>(cad));
+                            if (!AllConditions(conditionsMethod))
+                                goto continueMethods;
+                        }
 
                         if (Is<HarmonyPatch>(cad))
                         {
@@ -94,10 +104,11 @@ namespace QualityOfPlus.ConditionalPatches
                             isILManipulator = true;
                     }
 
-
+                    if (!shouldPatchMethod)
+                        continue;
 
                     if (conditionsMethod.Count > 0)
-                        shouldPatchMethod = conditionsMethod.All(x => x.ShouldPatch());
+                        shouldPatchMethod = AllConditions(conditionsMethod);
 
                     if (!shouldPatchMethod)
                         continue;
@@ -112,7 +123,9 @@ namespace QualityOfPlus.ConditionalPatches
                         BasePlugin.Logger.LogInfo(merged);
                         Patch(harmony, original, method, isPrefix, isPostfix, isTranspiler, isFinializer, isILManipulator);
                     }
+                    continueMethods:;
                 }
+                continueTypes:;
             }
         }
 
@@ -157,6 +170,16 @@ namespace QualityOfPlus.ConditionalPatches
             });
 
             return (T)Activator.CreateInstance(cad.AttributeType, paramList.ToArray());
+        }
+
+        private static bool AllConditions(List<QOPConditionalPatch> patches)
+        {
+            foreach (QOPConditionalPatch patch in patches)
+            {
+                if (!patch.ShouldPatch())
+                    return false;
+            }
+            return true;
         }
     }
 }
