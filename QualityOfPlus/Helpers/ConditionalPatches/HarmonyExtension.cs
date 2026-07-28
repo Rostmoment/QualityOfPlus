@@ -161,15 +161,55 @@ namespace QualityOfPlus.ConditionalPatches
             if (!typeof(T).IsAssignableFrom(cad.AttributeType))
                 throw new ArgumentException($"{cad.AttributeType.FullName} is not {typeof(T).FullName}");
 
+            object[] constructorArgs = cad.ConstructorArguments
+                .Select(UnwrapArgumentValue)
+                .ToArray();
 
-            List<CustomAttributeTypedArgument> list = cad.ConstructorArguments.ToList();
-            List<object> paramList = new List<object>();
-            list.ForEach(arg =>
+            T attribute = (T)Activator.CreateInstance(cad.AttributeType, constructorArgs);
+
+            foreach (var namedArg in cad.NamedArguments)
             {
-                paramList.Add(arg.Value);
-            });
+                object val = UnwrapArgumentValue(namedArg.TypedValue);
+                if (namedArg.IsField)
+                {
+                    FieldInfo field = cad.AttributeType.GetField(namedArg.MemberName, flags);
+                    field?.SetValue(attribute, val);
+                }
+                else
+                {
+                    PropertyInfo prop = cad.AttributeType.GetProperty(namedArg.MemberName, flags);
+                    prop?.SetValue(attribute, val);
+                }
+            }
 
-            return (T)Activator.CreateInstance(cad.AttributeType, paramList.ToArray());
+            return attribute;
+        }
+
+        private static object UnwrapArgumentValue(CustomAttributeTypedArgument arg)
+        {
+            if (arg.Value == null)
+                return null;
+
+            if (arg.Value is IEnumerable<CustomAttributeTypedArgument> collection)
+            {
+                Type elementType = arg.ArgumentType.IsArray
+                    ? arg.ArgumentType.GetElementType()
+                    : typeof(object);
+
+                List<object> unwrappedList = collection.Select(UnwrapArgumentValue).ToList();
+
+                Array typedArray = Array.CreateInstance(elementType, unwrappedList.Count);
+                for (int i = 0; i < unwrappedList.Count; i++)
+                {
+                    typedArray.SetValue(unwrappedList[i], i);
+                }
+                return typedArray;
+            }
+
+            if (arg.Value is Type typeValue)
+                return typeValue;
+
+            return arg.Value;
         }
 
         private static bool AllConditions(List<QOPConditionalPatch> patches)

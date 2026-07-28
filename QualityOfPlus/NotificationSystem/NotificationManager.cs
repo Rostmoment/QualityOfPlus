@@ -39,7 +39,7 @@ namespace QualityOfPlus.NotificationSystem
             scaler.referenceResolution = new Vector2(1920, 1080);
 
             CanvasGroup group = gameObject.AddComponent<CanvasGroup>();
-            group.alpha = 0f; // По умолчанию скрыто
+            group.alpha = 0f; 
 
             GameObject bgObject = new GameObject("NotificationBackground");
             bgObject.transform.SetParent(gameObject.transform, false);
@@ -57,6 +57,7 @@ namespace QualityOfPlus.NotificationSystem
 
             Outline outline = bgObject.AddComponent<Outline>();
             outline.effectColor = Color.white;
+            outline.effectDistance = Vector2.one * 5;
 
             TextMeshProUGUI titleText = UIHelpers.CreateText<TextMeshProUGUI>(BaldiFonts.SmoothComicSans36, "", bgObject.transform, Vector3.zero);
             titleText.alignment = TextAlignmentOptions.Center;
