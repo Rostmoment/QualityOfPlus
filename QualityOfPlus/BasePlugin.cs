@@ -22,6 +22,7 @@ using QualityOfPlus.DiscordSocialSDK;
 using QualityOfPlus.Gameplay;
 using QualityOfPlus.Interfaces;
 using QualityOfPlus.MoreIcons;
+using QualityOfPlus.NotificationSystem;
 using QualityOfPlus.PhotoMode;
 using QualityOfPlus.TransitionManager;
 using System.Collections;
@@ -106,6 +107,8 @@ namespace QualityOfPlus
             BasePlugin.Asset.Add<Sprite>("ArrowLeftUnhigh", sprites.First(x => x.name == "MenuArrowSheet_2"));
             BasePlugin.Asset.Add<Sprite>("ArrowRightHigh", sprites.First(x => x.name == "MenuArrowSheet_1"));
             BasePlugin.Asset.Add<Sprite>("ArrowRightUnhigh", sprites.First(x => x.name == "MenuArrowSheet_3"));
+
+            BasePlugin.Asset.Add<Sprite>("TooltipBG", sprites.First(x => x.name == "TooltipBG"));
         }
 
         private IEnumerator APIStart()
