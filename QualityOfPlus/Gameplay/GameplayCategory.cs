@@ -1,4 +1,5 @@
 ﻿using QualityOfPlus.Gameplay.DescriptionAnywhere;
+using QualityOfPlus.Gameplay.GameplayHistory;
 using QualityOfPlus.Gameplay.NowPlaysMusic;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace QualityOfPlus.Gameplay
         {
             AddFeature<DescriptionAnywhereFeature>();
             AddFeature<NowPlaysMusicFeature>();
+            AddFeature<GameplayHistoryFeature>();
         }
 
         public override void PostInitialize()
