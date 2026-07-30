@@ -87,6 +87,7 @@ namespace QualityOfPlus.NotificationSystem
             notification.title = titleText;
             notification.content = contentText;
 
+            GameObject.Destroy(canvas.GetComponent<GraphicRaycaster>());
             notification.SetHidden(true);
 
             return notification;
