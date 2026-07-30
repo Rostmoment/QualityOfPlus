@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using MTM101BaldAPI.SaveSystem;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using UnityEngine;
 
@@ -13,7 +15,6 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
     {
         public int seed;
 
-        [JsonConverter(typeof(IsoDateTimeConverter), "dd-MM-yyyy")]
         public DateTime date;
 
         public string name;
@@ -34,8 +35,14 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
 
     internal static class GameplayHistoryStorage
     {
-        private static string FilePath => Path.Combine(Application.persistentDataPath, "QOPGameplayHistory.json");
+        private static string FilePath => Path.Combine(Application.persistentDataPath, "Modded", "QOPGameplayHistory.json");
         private static List<GameplayHistoryEntry> entries;
+
+        private static readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            DateFormatString = "yyyy-MM-dd HH:mm"
+        };
 
         public static GameplayHistoryEntry[] Entries
         {
@@ -43,7 +50,7 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
             {
                 if (entries == null)
                     LoadHistory();
-                
+
                 return entries.ToArray();
             }
         }
@@ -58,7 +65,7 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
         {
             if (entries == null)
                 LoadHistory();
-            
+
             entries.Add(entry);
             SaveHistory();
         }
@@ -67,12 +74,7 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
         {
             List<GameplayHistoryEntry> dataToSave = entries ?? new List<GameplayHistoryEntry>();
 
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            };
-
-            string json = JsonConvert.SerializeObject(dataToSave, settings);
+            string json = JsonConvert.SerializeObject(dataToSave, jsonSettings);
 
             string directory = Path.GetDirectoryName(FilePath);
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
@@ -91,7 +93,7 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
 
             string json = File.ReadAllText(FilePath, Encoding.UTF8);
 
-            List<GameplayHistoryEntry> loaded = JsonConvert.DeserializeObject<List<GameplayHistoryEntry>>(json);
+            List<GameplayHistoryEntry> loaded = JsonConvert.DeserializeObject<List<GameplayHistoryEntry>>(json, jsonSettings);
             entries = loaded ?? new List<GameplayHistoryEntry>();
         }
     }
