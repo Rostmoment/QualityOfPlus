@@ -21,6 +21,7 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
 
         public override void PostInitialize(QOPCategory category)
         {
+            GameplayHistoryStorage.LoadHistory();
         }
         public IEnumerator APIStartAction()
         {

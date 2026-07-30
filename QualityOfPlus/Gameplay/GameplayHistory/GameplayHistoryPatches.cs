@@ -39,5 +39,16 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
 
             button.transform.SetSiblingIndex(__instance.transform.Find("BackButton").GetSiblingIndex());
         }
+
+
+        [HarmonyPatch(typeof(GameLoader), nameof(GameLoader.LoadLevel))]
+        [HarmonyPrefix]
+        private static void SaveData(SceneObject sceneObject)
+        {
+            if (!QOPManager.Instance.GetFeatureIfEnabled<GameplayHistoryFeature>(out GameplayHistoryFeature feature))
+                return;
+
+            GameplayHistoryStorage.AddEntry(GameplayHistoryEntry.CreateNow(CoreGameManager.Instance.Seed(), sceneObject));
+        }
     }
 }
