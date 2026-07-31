@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using QualityOfPlus.Helpers.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,13 +17,13 @@ namespace QualityOfPlus.BetterPitstop.NoFakeLoad
         {
             if (QOPManager.Instance.GetFeatureIfEnabled<NoFakeLoadFeature>(out _))
             {
-                __result = InstaTransition(entering, teleport, __instance.currentFieldTrip, __instance.fieldTripExitSpawnPoint);
+                __result = InstaTransition(__instance, entering, teleport, __instance.currentFieldTrip, __instance.fieldTripExitSpawnPoint);
                 return false;
             }
             return true;
         }
 
-        private static IEnumerator InstaTransition(bool entering, bool teleport, FieldTripObject currentFieldTrip, Vector3 fieldTripExitSpawnPoint)
+        private static IEnumerator InstaTransition(PitstopGameManager __instance, bool entering, bool teleport, FieldTripObject currentFieldTrip, Vector3 fieldTripExitSpawnPoint)
         {
             yield return null;
 
@@ -41,6 +42,9 @@ namespace QualityOfPlus.BetterPitstop.NoFakeLoad
                     Shader.SetGlobalTexture("_Skybox", Singleton<CoreGameManager>.Instance.sceneObject.skybox);
                 }
             }
+
+            if (!__instance.tripScreen.IsNullOrDestroyed())
+                GameObject.Destroy(__instance.tripScreen.gameObject);
         }
     }
 }
