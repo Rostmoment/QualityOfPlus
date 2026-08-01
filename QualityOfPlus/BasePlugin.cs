@@ -45,7 +45,7 @@ namespace QualityOfPlus
     [BepInPlugin(MyPluginInfo.GUID, MyPluginInfo.NAME, MyPluginInfo.VERSION)]
     public class BasePlugin : BaseUnityPlugin
     {
-        internal static NotificationManager notification;
+        internal static NotificationManager Notification { get; private set; }
         public new static ManualLogSource Logger { get; private set; }
         public static AssetManager Asset { get; private set; }
         public static Harmony Harmony { get; private set; }
@@ -110,7 +110,7 @@ namespace QualityOfPlus
             BasePlugin.Asset.Add<Sprite>("ArrowRightUnhigh", sprites.First(x => x.name == "MenuArrowSheet_3"));
 
             BasePlugin.Asset.Add<Sprite>("TooltipBG", sprites.First(x => x.name == "TooltipBG"));
-            notification = NotificationManager.CreateInstance("GlobalQOPNotification");
+            Notification = NotificationManager.CreateInstance("GlobalQOPNotification");
         }
 
         private IEnumerator APIStart()
