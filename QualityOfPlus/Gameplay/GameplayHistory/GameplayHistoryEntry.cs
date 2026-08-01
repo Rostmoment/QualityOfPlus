@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -31,6 +32,17 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
 
         public static GameplayHistoryEntry CreateNow(int seed, SceneObject scene) => CreateNow(seed, scene.levelTitle);
         public static GameplayHistoryEntry CreateNow(int seed, string level) => new GameplayHistoryEntry(seed, DateTime.Now, PlayerFileManager.Instance.fileName, level);
+
+        public override string ToString()
+        {
+            CultureInfo englishCulture = CultureInfo.GetCultureInfo("en-US");
+            CultureInfo systemCulture = CultureInfo.CurrentCulture;
+
+            string formattedDate = date.ToString("d MMMM yyyy", englishCulture);
+            string formattedTime = date.ToString("t", systemCulture);
+
+            return $"{level} | {seed} | {formattedDate} {formattedTime}";
+        }
     }
 
     internal static class GameplayHistoryStorage

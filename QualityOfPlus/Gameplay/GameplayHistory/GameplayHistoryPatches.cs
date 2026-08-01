@@ -19,12 +19,18 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
 
             StandardMenuButton button = GameObject.Instantiate(__instance.transform.Find("BackButton").GetComponent<StandardMenuButton>());
             button.eventOnHigh = true;
+            button.transitionOnPress = true;
+            button.transitionTime = 0.0167f;
             button.InitializeAllEvents();
 
             button.highlightedSprite = feature.Highlighted;
             button.unhighlightedSprite = feature.Unhighlighted;
             button.image.sprite = feature.Unhighlighted;
 
+            button.OnPress.AddListener(() =>
+            {
+                GameplayHistoryMenu.OpenMenu(__instance);
+            });
             button.OnHighlight.AddListener(() =>
             {
                 __instance.GetComponent<TooltipController>().UpdateTooltip("QOP_ABOUT_HISTORY");
@@ -38,6 +44,8 @@ namespace QualityOfPlus.Gameplay.GameplayHistory
             button.transform.localPosition = new Vector3(100, 128, 0);
 
             button.transform.SetSiblingIndex(__instance.transform.Find("BackButton").GetSiblingIndex());
+
+
         }
 
 
