@@ -22,6 +22,21 @@ namespace QualityOfPlus.BetterUI.BetterStickerMenu
             AddSortingMethod("First Gotten", stickers => stickers.Reverse().ToArray());
             AddSortingMethod("Quantity", stickers => stickers.OrderBy(x => x.Value).ToArray());
             AddSortingMethod("Quantity Descending", stickers => stickers.OrderByDescending(x => x.Value).ToArray());
+            AddSortingMethod("Alphabetical", stickers => stickers.OrderBy(x => NormalizeTitle(x.Data.GetLocalizedStickerTitle(null)), StringComparer.OrdinalIgnoreCase).ToArray());
+            AddSortingMethod("Alphabetical Reversed", stickers => stickers.OrderByDescending(x => NormalizeTitle(x.Data.GetLocalizedStickerTitle(null)), StringComparer.OrdinalIgnoreCase).ToArray());
+        }
+        private static string NormalizeTitle(string title)
+        {
+            if (string.IsNullOrEmpty(title))
+                return string.Empty;
+
+            StringBuilder builder = new StringBuilder(title.Length);
+            foreach (char c in title)
+            {
+                if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))
+                    builder.Append(c);
+            }
+            return builder.ToString();
         }
 
         internal void AddSortingMethod(string name, Func<ExtendedInventorySticker[], ExtendedInventorySticker[]> sorter)
