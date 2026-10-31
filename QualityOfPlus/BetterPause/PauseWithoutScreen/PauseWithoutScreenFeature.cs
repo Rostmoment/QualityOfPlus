@@ -30,7 +30,7 @@ namespace QualityOfPlus.BetterPause.PauseWithoutScreen
             if (CoreGameManager.Instance.IsNullOrDestroyed())
                 return;
 
-            if (!Input.GetKeyDown(keyBind.Value) || !this.IsEnabled())
+            if (!Input.GetKeyDown(keyBind.Value) || !this.IsEnabled() || !CoreGameManager.Instance.gameObject.activeSelf)
                 return;
 
             if (CoreGameManager.Instance.disablePause || GlobalCam.Instance.TransitionActive)
